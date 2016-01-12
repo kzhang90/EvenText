@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root ''
+  devise_for :users, :controllers => { registrations: 'registrations' }
 end
