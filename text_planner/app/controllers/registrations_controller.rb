@@ -1,12 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
 
-  def new
-    build_resource({})
-    @user = User.new
-    respond_with @user, :location => root_path
-  end
-  
-
   private
 
   def sign_up_params

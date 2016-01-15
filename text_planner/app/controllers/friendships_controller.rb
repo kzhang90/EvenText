@@ -1,5 +1,11 @@
 class FriendshipsController < ApplicationController
   
+  def index
+  end
+
+  def new
+  end
+
   def create
     # take current user model and build a friendship through it
     # call friend id and pass in friend id parameter from url which is passed in from the previous request
@@ -12,6 +18,16 @@ class FriendshipsController < ApplicationController
       # need to update the error message
       flash[:error] = "unable to add friend."
       redirect_to root_url
+  end
+
+  def edit
+  end
+
+  def show
+  end
+
+  def update
+    # patch/put method on from the edit page
   end
 
   def destroy

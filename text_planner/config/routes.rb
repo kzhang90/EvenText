@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :bookmarks, shallow: true
-    resources :friendships, shallow: true
+    resources :friendships, only: [:index, :show, :destroy], shallow: true
   end
 
   resources :bookmarks do
