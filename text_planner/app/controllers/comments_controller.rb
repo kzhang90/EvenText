@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   def index
+    binding.pry
+    @comments = Comment.find(params[:bookmark_id])
   end
 
   def new

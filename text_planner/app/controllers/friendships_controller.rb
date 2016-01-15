@@ -13,11 +13,11 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
       flash[:notice] = "Successfully created friendship."
-      redirect_to root_url
+      redirect_to root_path
     else
       # need to update the error message
       flash[:error] = "unable to add friend."
-      redirect_to root_url
+      redirect_to root_path
   end
 
   def edit
