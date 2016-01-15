@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates_presence_of :first_name, :last_name, :profile_picture, :phone_number
+  validates_presence_of :name, :email, :phone_number
 
 end

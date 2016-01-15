@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :bookmarks, shallow: true
     resources :friendships, shallow: true
-    resources :comments, shallow: true
   end
 
   resources :bookmarks do
