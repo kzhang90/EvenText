@@ -54,5 +54,5 @@ group :development do
 end
 
 gem 'devise'
-gem "httparty"
 gem 'twilio-ruby'
+gem "typhoeus"

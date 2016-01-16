@@ -3,6 +3,7 @@ class BookmarksController < ApplicationController
   end
 
   def create
+    @bookmark = Bookmark.new()
   end
 
   def new

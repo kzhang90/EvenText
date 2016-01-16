@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   get 'home', :to => 'home#index'
+  get 'searchApis', :to => 'home#searchApis'
   
   resources :users do
     resources :bookmarks, shallow: true
