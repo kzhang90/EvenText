@@ -5,14 +5,16 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    @bookmark = Bookmark.build
+    @bookmark = Bookmark.create()
   end
 
   def new
     # people can make new bookmarks in the
+
   end
 
   def edit
+    # 
   end
 
   def show
