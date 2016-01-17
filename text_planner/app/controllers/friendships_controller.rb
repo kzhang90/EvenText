@@ -1,6 +1,7 @@
 class FriendshipsController < ApplicationController
   
   def index
+    # list all of a user's friendships.
   end
 
   def new

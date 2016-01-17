@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   # add before_action :confirm_logged_in except: [:method]
   def index
+    @user = current_user
   end
 
   def searchApis
