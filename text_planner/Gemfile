@@ -56,3 +56,5 @@ end
 gem 'devise'
 gem 'twilio-ruby'
 gem "typhoeus"
+gem 'omniauth'
+gem 'omniauth-facebook'
