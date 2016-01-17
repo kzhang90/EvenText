@@ -3,15 +3,17 @@
 <!-- single page app with search bar and results being displayed. -->
 
 <!-- search form -->
-<%= simple_form_for , url: searchApis_path, :method => 'get' do |f| %>
+<%= simple_form_for :search, url: searchApis_path, :method => 'get' do |f| %>
+  <%= f.input :keyword, :placeholder => 'keyword', input_html: { name: :keyword } %>
+  <%= f.input :city, :placeholder => 'city', input_html: { name: :keyword } %>
   <%= f.input :start_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :start_date } %>
   <%= f.input :end_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :end_date } %>
   <%= f.button :submit, "Submit" %>
 <% end %>
 
-<!-- maybe use ransack? -->
+<!-- display results below -->
 
-<!-- display search results below -->
-<div>
-  <% @results.each do |result| %>
-</div>
+<%= @response.inspect %>
+
+
+

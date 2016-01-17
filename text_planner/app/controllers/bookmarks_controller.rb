@@ -1,5 +1,8 @@
 class BookmarksController < ApplicationController
   def index
+    
+    # redirected here after user clicks link to bookmarks index path
+
   end
 
   def create
