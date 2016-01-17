@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117195123) do
+ActiveRecord::Schema.define(version: 20160117233805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bookmarks", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
     t.string   "image"
     t.string   "description"
     t.string   "location"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160117195123) do
   end
 
   create_table "reminders", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
     t.integer  "phone_number"
     t.integer  "time"
     t.datetime "created_at",   null: false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160117195123) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
+    t.string   "first_name"
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.string   "email",                            default: "", null: false
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160117195123) do
     t.integer  "phone_number",           limit: 8
     t.string   "provider"
     t.string   "uid"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

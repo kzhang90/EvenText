@@ -5,16 +5,17 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    @bookmark = Bookmark.create()
+    @bookmark = Bookmark.new bookmark_params
   end
 
   def new
-    # people can make new bookmarks in the
+    # people can make new bookmarks in the new bookmarks page
 
   end
 
   def edit
-    # 
+    # @bookmark = Bookmark.find(params[:id])
+
   end
 
   def show
@@ -26,6 +27,13 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+    def bookmark_params
+      params.require(:bookmark).permit(:)
+    end
   end
 
 end
