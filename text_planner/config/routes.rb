@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'home/index'
-
   root 'welcome#index'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
