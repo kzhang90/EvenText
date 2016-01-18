@@ -9,8 +9,8 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    # people can make new bookmarks in the new bookmarks page
-
+    # make new bookmarks in bookmarks index
+    :index 
   end
 
   def edit
