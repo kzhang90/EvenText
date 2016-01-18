@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :reminders
   end
 
-  resources :bookmarks, shallow: true do
+  resources :bookmarks, except: :new, shallow: true do
     resources :comments
   end
 
