@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'home', :to => 'home#index'
   get 'searchApis', :to => 'home#searchApis'
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { :omniauth_callbacks => 'callbacks' }
   
   resources :users, shallow: true do
     resources :bookmarks, except: :new
