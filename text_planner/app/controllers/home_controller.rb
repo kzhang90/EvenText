@@ -18,7 +18,7 @@ class HomeController < ApplicationController
     # yelp_request = Typhoeus::Request.new('',
     #                                   )
     # set @result to be the data that I want.
-    render 'index'
+    render :json => @response
   end
 
 
