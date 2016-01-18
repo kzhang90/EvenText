@@ -1,3 +1,23 @@
 <!-- show all of the user's bookmarks here -->
 
-<%= @bookmarks %>
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li><%= bookmark.title %></li>
+    <li><%= bookmark.image %></li>
+    <li><%= bookmark.description %></li>
+    <li><%= bookmark.location %></li>
+    <li><%= bookmark.date %></li>
+    <li><%= bookmark.created_at %></li>
+    <li><%= bookmark.updated_at %></li>
+    <!-- each one of these bookmarks can be edited or deleted. show page has comments on it. -->
+    <!-- displays how many comments there are on each bookmark -->
+  <% end %>
+</ul>
+
+
+<!-- add a new bookmark below -->
+
+<%= simple_form_for @bookmark, url: 
+
+
+

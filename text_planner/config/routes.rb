@@ -1,21 +1,21 @@
 Rails.application.routes.draw do
 
   root 'welcome#index'
-
-  devise_for :users, :controllers => { registrations: 'registrations' }
-
   get 'home', :to => 'home#index'
   get 'searchApis', :to => 'home#searchApis'
+
+  devise_for :users, :controllers => { registrations: 'registrations' }
   
-  resources :users do
-    resources :bookmarks, shallow: true
-    resources :friendships, only: [:index, :show, :destroy], shallow: true
+  resources :users, shallow: true do
+    resources :bookmarks, except: :new
+    resources :friendships, only: [:index, :show, :destroy]
+    resources :reminders
   end
 
-  resources :bookmarks do
-    resources :comments, shallow: true
+  resources :bookmarks, shallow: true do
+    resources :comments
   end
 
-  resources :reminders
+
 
 end
