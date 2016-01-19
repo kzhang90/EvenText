@@ -1,23 +1,28 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.find(params[:bookmark_id])
+    @bookmark = Bookmark.find params[:bookmark_id]
+    @comment = @bookmark.comments.new
   end
 
-  def new
-  end
+  # def new
+  # end
 
   def create
+    @bookmark = Bookmark.find params[:bookmark_id]
+    @comment = @bookmark.comments.new bookmark_params
+    @comment.user = current_user
+    @comment.save
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def show
-  end
+  # def show
+  # end
 
-  def update
-  end
+  # def update
+  # end
 
-  def destroy
-  end
+  # def destroy
+  # end
 end

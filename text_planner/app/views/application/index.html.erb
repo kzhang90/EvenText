@@ -1,0 +1,33 @@
+<h1>NOT SINGLE PAGE</h1>
+<p>Home page after logging in</p>
+<!-- single page app with search bar and results being displayed. -->
+
+<!-- search form -->
+<div id="searchForm">
+
+<%= simple_form_for :search, remote: true, url: search_apis_path, :method => 'get', input_html: {id: 'my_id'} do |f| %>
+  <%= f.input :keyword, :placeholder => 'keyword', input_html: { name: :keyword } %>
+  <%= f.input :city, :placeholder => 'city', input_html: { name: :city } %>
+  <%= f.input :start_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :start_date } %>
+  <%= f.input :end_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :end_date } %>
+  <%= f.button :submit, "Submit" %>
+<% end %>
+</div>
+
+<!-- display results below -->
+<!-- make div and append response to a div -->
+
+
+<h3>Link to bookmarks here!</h3>
+<!-- link to my bookmarks -->
+
+<%= current_user.inspect %>
+<% if @events %>
+  <% @events.each do |event| %>
+    <p><%= event["name"]["text"] %></p>
+  <% end %>
+<% end %>
+
+
+
+

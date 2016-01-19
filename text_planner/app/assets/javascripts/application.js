@@ -16,4 +16,11 @@
 //= require turbolinks
 //= require angular/angular
 //= require_tree .
-
+$(document).ready(function() {
+  console.log('ready');
+  $(".simple_form").on("ajax:success", function(e,data,status,xhr) {
+    console.log(data);
+    // works with xhr too. what is xhr?
+    // make a div in the erb file and append to it, 
+  });
+});
