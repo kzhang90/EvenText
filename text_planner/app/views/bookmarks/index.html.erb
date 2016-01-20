@@ -1,7 +1,7 @@
 <!-- show all of the user's bookmarks here -->
 
-<ul>
   <% @bookmarks.each do |bookmark| %>
+<div>
     <li><%= bookmark.title %></li>
     <li><%= bookmark.image %></li>
     <li><%= bookmark.description %></li>
@@ -13,7 +13,7 @@
     <!-- each one of these bookmarks can be edited or deleted. show page has comments on it. -->
     <!-- displays how many comments there are on each bookmark -->
   <% end %>
-</ul>
+</div>
 
 
 <!-- add a new bookmark below -->

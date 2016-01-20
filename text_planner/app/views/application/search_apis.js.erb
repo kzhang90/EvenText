@@ -1,6 +1,6 @@
 // iterate through these events 
 <% @bookmarks.each do |bookmark| %>
- $("<%= escape_javascript(render @bookmark) %>").appendTo("#api-results");
+ $("<%= escape_javascript(render bookmark) %>").appendTo("#api-results");
 <% end %>
 // for each one of these arrays, create/post user_bookmarks_path on submit.
 // bookmark instance is what i have access to in the bookmark partial

@@ -4,9 +4,6 @@ class CommentsController < ApplicationController
     @comment = @bookmark.comments.new
   end
 
-  # def new
-  # end
-
   def create
     @bookmark = Bookmark.find params[:bookmark_id]
     @comment = @bookmark.comments.new bookmark_params
@@ -14,15 +11,12 @@ class CommentsController < ApplicationController
     @comment.save
   end
 
-  # def edit
-  # end
+  def show
+  end
 
-  # def show
-  # end
+  def update
+  end
 
-  # def update
-  # end
-
-  # def destroy
-  # end
+  def destroy
+  end
 end

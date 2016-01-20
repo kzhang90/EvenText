@@ -29,16 +29,21 @@ class ApplicationController < ActionController::Base
     @events = response["events"]
     # make an array of bookmarks
     # need to handle empty responses.
-    binding.pry
+    # function that sets empty string if undefined
+    # some logos are null
+    # @filteredevents = @events.map {
+    #   |event| (defined?(event["logo"]) ? event["logo"]=" ")
+    # }
     @bookmarks = @events.map {
       |event| Bookmark.new(
         title: event["name"]["text"],
-        image: event["logo"]["url"],
+        image: event["logo"].nil? ? "NULL" : event["logo"]["url"],
         description: event["description"]["text"].gsub!("\n"," "),
         date: event["start"]["local"].split("T")[0],
         time: event["start"]["local"].split("T")[1],
         url: event["url"]
     )}
+
 
     # @events is an array of objects where the top 10 are displayed 
     # data in js file is @events once it is rednered as :json

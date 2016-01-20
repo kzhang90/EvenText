@@ -30,7 +30,6 @@ class BookmarksController < ApplicationController
   end
 
   private
-
     def bookmark_params
       params.require(:bookmark).permit(:title, :image, :description, :location, :date, :time, :url)
     end
