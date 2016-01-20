@@ -27,17 +27,18 @@ class ApplicationController < ActionController::Base
     # use line 28 to view response, then comment out and uncomment 29 & 30 for the actual view code
     # render json: response
     @events = response["events"]
-    binding.pry
     # make an array of bookmarks
     # need to handle empty responses.
+    binding.pry
     @bookmarks = @events.map {
-      |event| Bookmark.new(title: event["name"]["text"],
+      |event| Bookmark.new(
+        title: event["name"]["text"],
         image: event["logo"]["url"],
         description: event["description"]["text"].gsub!("\n"," "),
         date: event["start"]["local"].split("T")[0],
         time: event["start"]["local"].split("T")[1],
-        url: event["url"])
-    }
+        url: event["url"]
+    )}
 
     # @events is an array of objects where the top 10 are displayed 
     # data in js file is @events once it is rednered as :json
