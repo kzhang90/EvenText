@@ -1,7 +1,6 @@
 class BookmarksController < ApplicationController
   def index
     @bookmarks = current_user.bookmarks
-    # redirected here after user clicks link to bookmarks index path
     @bookmark = Bookmark.new
   end
 

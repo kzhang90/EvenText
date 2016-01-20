@@ -35,7 +35,8 @@ class ApplicationController < ActionController::Base
         image: event["logo"]["url"],
         description: event["description"]["text"].gsub!("\n"," "),
         date: event["start"]["local"].split("T")[0],
-        time: event["start"]["local"].split("T")[1])
+        time: event["start"]["local"].split("T")[1],
+        url: event["url"])
     }
 
     # @events is an array of objects where the top 10 are displayed 
