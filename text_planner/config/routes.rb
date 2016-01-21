@@ -8,14 +8,30 @@ Rails.application.routes.draw do
   
   # clean up routes...
   resources :users, only: [] do
-    resources :bookmarks, shallow: true, except: [:new, :edit]
-    resources :comments, shallow: true, only: [:index, :show]
+    resources :bookmarks, shallow: true, only: [:index, :show, :create, :update, :destroy]
+    # resources :comments, shallow: true, only: [:index, :update]
+    # index of user's comments will be on user's profile, can they destroy?!
     resources :friendships, shallow: true, only: [:index, :create, :destroy]
+    # research twilio and decide below:
     resources :reminders, shallow: true
   end
 
-  resources :bookmarks, only: [] do
-    resources :comments, shallow: true
-  end
+  # bookmarks will not have comments in MVP
+  # resources :bookmarks, only: [] do
+  #   resources :comments, shallow: true
+  # end
 
 end
+
+# index PAGE
+# show PAGE
+# edit PAGE
+# new PAGE
+# create ACTION
+# update ACTION
+# destroy ACTION
+# 
+
+
+
+
