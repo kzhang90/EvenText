@@ -6,7 +6,7 @@
     <div class="users">
       <p>
         <strong><%= user.username %></strong>
-        <%= link_to "Add Friend", trigger controller action%>
+        <%= link_to "Add Friend", friendships_path(:friend_id => user)%>
         <div class="clear"></div>
       </p>
     </div>
