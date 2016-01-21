@@ -6,9 +6,12 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'callbacks' }
   
+  # clean up routes...
   resources :users, only: [] do
-    resources :bookmarks, shallow: true, except: [:new, :edit, :update]
-    resources :comments, :friendships, :reminders, shallow: true, only: [:index, :show]
+    resources :bookmarks, shallow: true, except: [:new, :edit]
+    resources :comments, shallow: true, only: [:index, :show]
+    resources :friendships, shallow: true, only: [:index, :create, :destroy]
+    resources :reminders, shallow: true
   end
 
   resources :bookmarks, only: [] do
