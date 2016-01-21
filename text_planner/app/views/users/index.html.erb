@@ -1,0 +1,14 @@
+<!-- list of all the users -->
+<% title "User List" %>
+
+<div id="users">
+  <% for user in @users %>
+    <div class="users">
+      <p>
+        <strong><%= user.username %></strong>
+        <%= link_to "Add Friend", trigger controller action%>
+        <div class="clear"></div>
+      </p>
+    </div>
+  <% end %>
+</div>
