@@ -26,4 +26,5 @@ class FriendshipsController < ApplicationController
     # current_user page is the profile page
     redirect_to current_user
   end
+  
 end
