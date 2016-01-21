@@ -1,10 +1,7 @@
 class FriendshipsController < ApplicationController
   
   def index
-    # list all of a user's friendships.
-  end
-
-  def new
+    # current user's index of friends
   end
 
   def create
@@ -13,22 +10,13 @@ class FriendshipsController < ApplicationController
     # friend_id from previous request is the friend_id  you use to build the friendship
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
-      flash[:notice] = "Successfully created friendship."
-      redirect_to root_path
+      flash[:notice] = "Added friend successfully."
+      # redirect_to profile page
+      redirect_to current_user
     else
-      # need to update the error message
-      flash[:error] = "unable to add friend."
-      redirect_to root_path
-  end
-
-  def edit
-  end
-
-  def show
-  end
-
-  def update
-    # patch/put method on from the edit page
+      flash[:error] = "Unable to add friend."
+      # redirect to where?
+      redirect_to current_user
   end
 
   def destroy

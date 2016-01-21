@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     resources :comments, :friendships, :reminders, shallow: true, only: [:index, :show]
   end
 
-  resources :bookmarks do
-    resources :comments
+  resources :bookmarks, only: [] do
+    resources :comments, shallow: true
   end
 
 end

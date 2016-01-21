@@ -2,6 +2,8 @@ class BookmarksController < ApplicationController
   def index
     @bookmarks = current_user.bookmarks
     @bookmark = Bookmark.new
+    # bookmarks page will have a form to create a new bookmark and 
+    # then reload all bookmarks without refreshing so ajax
   end
 
   def create
