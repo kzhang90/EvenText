@@ -3,14 +3,15 @@
 <!-- new search, show clickable search results,  -->
 <!-- single page app with search bar and results being displayed. -->
 <!-- search form -->
-
-<%= simple_form_for :search, remote: true, :url => search_apis_path, html: { method: :get, id: :search_me } do |f| %>
-  <%= f.input :keyword, :placeholder => 'keyword', input_html: { name: :keyword } %>
-  <%= f.input :city, :placeholder => 'city', input_html: { name: :city } %>
-  <%= f.input :start_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :start_date } %>
-  <%= f.input :end_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :end_date } %>
-  <%= f.button :submit, "Submit" %>
-<% end %>
+<div id="search-form">
+  <%= simple_form_for :search, remote: true, :url => search_apis_path, html: { method: :get, id: :search_me } do |f| %>
+    <%= f.input :keyword, :placeholder => 'keyword', input_html: { name: :keyword } %>
+    <%= f.input :city, :placeholder => 'city', input_html: { name: :city } %>
+    <%= f.input :start_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :start_date } %>
+    <%= f.input :end_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :end_date } %>
+    <%= f.button :submit, "Submit" %>
+  <% end %>
+</div>
 
 <!-- display results below -->
 <!-- make div and append response to a div -->

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   
   # clean up routes...
   resources :users, only: [] do
-    resources :bookmarks, shallow: true, only: [:index, :show, :create, :update, :destroy]
+    resources :bookmarks, shallow: true, only: [:index, :edit, :create, :update, :destroy]
     # resources :comments, shallow: true, only: [:index, :update]
     # index of user's comments will be on user's profile, can they destroy?!
     resources :friendships, shallow: true, only: [:index, :create, :destroy]

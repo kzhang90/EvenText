@@ -3,20 +3,23 @@ class BookmarksController < ApplicationController
   def index
     @bookmarks = current_user.bookmarks
     @bookmark = Bookmark.new
+    @user = User.find_by_id params[:user_id]
+
   end
 
   def create
     @bookmark = Bookmark.new bookmark_params
+    flash[:success] = "Bookmark added!"
+    flash[:error] = "Bookmark not created!"
     respond_to do |format|
-      flash[:success] = "Bookmark added!"
-      flash[:error] = "Bookmark not created!"
       if @bookmark.save
-        format.html { render :index }
-        # format.js {}
-        format.json { flash[:success] }
+        # saving from html page
+        format.html { render :index  flash"bookmark saved successfully"}
+        format.json {}
+ 
       else 
         format.html { render :index }
-        format.json { flash [:error]}
+        format.json { flash [:error] }
       end
     end
   end

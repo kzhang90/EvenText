@@ -1,1 +1,2 @@
-$().appendTo("#all-bookmarks">
+// $("<p>Bookmark added!</p>").appendTo()
+$("<p><%= escape_javascript(flash[:success]) %></p>").appendTo("#search-form")
