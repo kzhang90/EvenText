@@ -1,17 +1,23 @@
 class BookmarksController < ApplicationController
+
   def index
     @bookmarks = current_user.bookmarks
     @bookmark = Bookmark.new
-    # bookmarks page will have a form to create a new bookmark and 
-    # then reload all bookmarks without refreshing so ajax
   end
 
   def create
     @bookmark = Bookmark.new bookmark_params
-    if @bookmark.save
-      render json: @bookmark
-    else 
-      render json: {errors: @bookmark.errors.full_messages}
+    respond_to do |format|
+      flash[:success] = "Bookmark added!"
+      flash[:error] = "Bookmark not created!"
+      if @bookmark.save
+        format.html { render :index }
+        # format.js {}
+        format.json { flash[:success] }
+      else 
+        format.html { render :index }
+        format.json { flash [:error]}
+      end
     end
   end
 
@@ -34,7 +40,7 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.require(:bookmarks).permit(:title, :image, :description, :date, :time, :url)
+    params.require(:bookmark).permit(:title, :image, :description, :date, :time, :url)
   end
 
 end
