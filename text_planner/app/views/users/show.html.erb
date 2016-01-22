@@ -1,17 +1,11 @@
-profile page -->
-<h1>My Profile</h1>
+<h2><%= current_user.first_name %> <%=current_user.last_name %>'s Profile</h2>
 
-<p>Name: <%= current_user.first_name %>+" "<%=current_user.last_name %></p>
-
-<h2>Friends</h2>
+<h4>My Friends</h4>
 <ul>
   <% for friendship in @user.friendships %>
     <li>
-      <%= friendship.friend.username %>
-      <%= link_to "remove", friendship :method => :delete %>
+      <%= h friendship.friend.username %>
+      (<%= link_to "Remove", friendship_path(friendship), :method => :delete %>)
     </li>
+    <% end %>
 </ul>
-
-<div>Link to bookmarks here</div>
-
-<div>Link to reminders here</div>

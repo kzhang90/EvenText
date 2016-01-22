@@ -7,15 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= render 'layouts/nav' %>
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
+
+<%= render partial: 'layouts/nav' %>
+
+<% flash.each do |key, value| %>
+  <% if key == "notice" %>
+    <%= content_tag :div, value, class: "text-center alert alert-warning" %>
+  <% elsif key == "alert" %>
+    <%= content_tag :div, value, class: "text-center alert alert-danger" %>
+  <% else %>
+    <%= content_tag :div, value, class: "text-center alert alert-success" %>
+  <% end %>
 <% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
+<div class="container">
 
 <%= yield %>
 
+
+<%= debug(params) if Rails.env.development? %>
 </body>
 </html>

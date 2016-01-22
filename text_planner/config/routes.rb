@@ -5,9 +5,8 @@ Rails.application.routes.draw do
   get  'search_apis', to: 'application#search_apis'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'callbacks' }
-  
-  # clean up routes...
-  resources :users, only: [] do
+
+  resources :users, only: [:index, :show] do
     resources :bookmarks, shallow: true, only: [:index, :edit, :create, :update, :destroy]
     # resources :comments, shallow: true, only: [:index, :update]
     # index of user's comments will be on user's profile, can they destroy?!

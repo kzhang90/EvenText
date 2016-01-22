@@ -4,24 +4,37 @@ class BookmarksController < ApplicationController
     @bookmarks = current_user.bookmarks
     @bookmark = Bookmark.new
     @user = User.find_by_id params[:user_id]
-
   end
 
   def create
     @bookmark = Bookmark.new bookmark_params
-    flash[:success] = "Bookmark added!"
-    flash[:error] = "Bookmark not created!"
+    @bookmark.user_id = current_user.id
+    # flash[:success] = "Bookmark added!"
+    # flash[:error] = "Bookmark not created!"
     respond_to do |format|
       if @bookmark.save
         # saving from html page
-        format.html { render :index  flash"bookmark saved successfully"}
-        format.json {}
- 
+        format.html { 
+          flash[:success] = "Bookmark successfully created!"
+          redirect :index 
+        }
+        # ajax request coming from application index page
+        # and bookmark index page. how to handle that?
+        format.js {}
       else 
-        format.html { render :index }
-        format.json { flash [:error] }
+        format.html { 
+          flash.now[:error] = "Bookmark was not created, try again!"
+          render :index
+        }
+        format.json {
+        }
       end
     end
+  end
+
+  def edit 
+    @bookmark = Bookmark.find(params[:id])
+    # renders edit page
   end
 
   def update
