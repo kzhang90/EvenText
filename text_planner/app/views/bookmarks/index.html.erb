@@ -8,9 +8,11 @@
             <div><%= bookmark.image %></div>
             <div><%= bookmark.description %></div>
             <div><%= bookmark.location %></div>
+            <div><%= bookmark.time %></div>
             <div><%= bookmark.date %></div>
             <div><%= bookmark.created_at %></div>
             <div><%= bookmark.updated_at %></div>
+            <div><%= bookmark.url %></div>
             <div><%= link_to "Edit", [:edit, bookmark]%></div>
             <div><%= link_to "Delete Bookmark", bookmark, :method => :delete, data: {confirm: "Are you sure?"}%></div>
     </div>
