@@ -1,24 +1,34 @@
 <!-- show all of the user's bookmarks here -->
+<!-- be able to add these bookmarks as reminders -->
+<div id="all-bookmarks">
+    <% @bookmarks.each do |bookmark| %>
+        <div>
+            <li><%= bookmark.title %></li>
+            <li><%= bookmark.image %></li>
+            <li><%= bookmark.description %></li>
+            <li><%= bookmark.location %></li>
+            <li><%= bookmark.date %></li>
+            <li><%= bookmark.created_at %></li>
+            <li><%= bookmark.updated_at %></li>
+            <li>bookmark dropdown comments</li>
+        <!-- each one of these bookmarks can be edited or deleted. show page has comments on it. -->
+        <!-- displays how many comments there are on each bookmark -->
+    <% end %>
+        </div>
+</div>
 
-<% @bookmarks.each do |bookmark| %>
-    <div>
-        <li><%= bookmark.title %></li>
-        <li><%= bookmark.image %></li>
-        <li><%= bookmark.description %></li>
-        <li><%= bookmark.location %></li>
-        <li><%= bookmark.date %></li>
-        <li><%= bookmark.created_at %></li>
-        <li><%= bookmark.updated_at %></li>
-        <li>bookmark dropdown comments</li>
-    <!-- each one of these bookmarks can be edited or deleted. show page has comments on it. -->
-    <!-- displays how many comments there are on each bookmark -->
+
+
+<div>Add a bookmark below:</div>
+<%= simple_form_for @bookmark do |f| %>
+    <%= f.error_messages %>
+    <%= f.input :title %>
+    <%= f.input :image %>
+    <%= f.input :description %>
+    <%= f.input :location %>
+    <%= f.input :date %>
+    <%= f.button :submit %>
 <% end %>
-    </div>
-
-
-<!-- add a new bookmark below -->
-
-<%= simple_form_for @bookmark, url: 
 
 
 
