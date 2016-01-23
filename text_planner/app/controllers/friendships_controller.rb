@@ -1,7 +1,6 @@
 class FriendshipsController < ApplicationController
   
   def index
-    # current user's index of friends
   end
 
   def create

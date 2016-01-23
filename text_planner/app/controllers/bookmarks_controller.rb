@@ -9,28 +9,25 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = Bookmark.new bookmark_params
     @bookmark.user_id = current_user.id
-    # flash[:success] = "Bookmark added!"
-    # flash[:error] = "Bookmark not created!"
+
     respond_to do |format|
       if @bookmark.save
-        # saving from html page
+        flash[:notice] = "Bookmark successfully created!"
         format.html { 
-          flash[:success] = "Bookmark successfully created!"
-          redirect :index 
+          redirect_to user_bookmarks_path
         }
-        # ajax request coming from application index page
-        # and bookmark index page. how to handle that?
         format.js {}
+        # format.json { render @bookmark }
       else 
-        format.html { 
-          flash.now[:error] = "Bookmark was not created, try again!"
-          render :index
-        }
-        format.json {
-        }
+        flash.now[:error] = "Bookmark was not created, try again!"
+        render :index
       end
     end
   end
+
+  # need this show page?
+  # def show
+  # end
 
   def edit 
     @bookmark = Bookmark.find(params[:id])
@@ -40,7 +37,7 @@ class BookmarksController < ApplicationController
   def update
     @bookmark = Bookmark.find(params[:id])
     if @bookmark.update(bookmark_params)
-      render json: @bookmark
+      redirect_to index_path, flash: {}
     else
       render json: {errors: @bookmark.errors.full_messages}
     end
@@ -48,15 +45,23 @@ class BookmarksController < ApplicationController
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
-    @bookmark.destroy
-    # success below?
-    render json: {}
+    if @bookmark.destroy
+      flash[:notice] = "successfully deleted!"
+      format.js {
+        # in js file just remove the selected element
+      }
+    else
+      render 
+
+    # # success below?
+    # render json: {}
+    redirect_to user_bookmarks_path(current_user.id)
   end
 
   private
 
   def bookmark_params
-    params.require(:bookmark).permit(:title, :image, :description, :date, :time, :url)
+    params.require(:bookmark).permit(:title, :image, :description, :location, :date, :time, :url)
   end
 
 end
