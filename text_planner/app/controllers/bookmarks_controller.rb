@@ -12,50 +12,76 @@ class BookmarksController < ApplicationController
 
     respond_to do |format|
       if @bookmark.save
-        flash[:notice] = "Bookmark successfully created!"
         format.html { 
-          redirect_to user_bookmarks_path
+          redirect_to user_bookmarks_path,
+          notice: 'Bookmark was successfully created.'
+        }
+        format.json { 
+          render json: @bookmark,
+          status: :created, 
+          location: @bookmark
         }
         format.js {}
-        # format.json { render @bookmark }
       else 
-        flash.now[:error] = "Bookmark was not created, try again!"
-        render :index
+        format.html {
+          render :index
+        }
+        format.json {
+          render json: @bookmark.errors.full_messages
+        }
+        format.js {}
       end
     end
   end
 
-  # need this show page?
-  # def show
-  # end
-
   def edit 
     @bookmark = Bookmark.find(params[:id])
-    # renders edit page
   end
 
   def update
     @bookmark = Bookmark.find(params[:id])
-    if @bookmark.update(bookmark_params)
-      redirect_to index_path, flash: {}
-    else
-      render json: {errors: @bookmark.errors.full_messages}
+    @bookmark.user_id = current_user.id
+
+    respond_to do |format|
+      if @bookmark.update_attributes(params[:bookmark])
+        format.html {
+          redirect_to user_bookmarks_path,
+          notice: 'Bookmark has been successfully updated.'
+        }
+        format.json {
+          render json: @bookmark
+        }
+      else
+        # debug this
+        format.html {
+          redirect_to edit_bookmarks_path,
+          notice: 'Bookmark could not be updated. Please try again.'
+        }
+        format.json {
+          render json: @bookmark.errors.full_messages
+        }
+      end
     end
   end
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
-    if @bookmark.destroy
-      flash[:notice] = "successfully deleted!"
-      format.js {
-        # in js file just remove the selected element
-      }
-    else
-      render 
 
-    # # success below?
-    # render json: {}
-    redirect_to user_bookmarks_path(current_user.id)
+    respond_to do |format|
+      if @bookmark.destroy
+        format.html {
+          redirect_to user_bookmarks_path(current_user.id),
+          notice: 'Bookmark has been successfully deleted.'
+        }
+        format.js {}    
+      else
+        format.html {
+          redirect_to user_bookmarks_path(current_user.id),
+          error: 'Bookmark could not be deleted.'
+        }
+        format.js {}
+      end
+    end
   end
 
   private
