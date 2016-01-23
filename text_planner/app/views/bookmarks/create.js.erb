@@ -1,4 +1,21 @@
-// $("<p>Bookmark added!</p>").appendTo()
+console.log("aaaah");
+
 $("<p><%= escape_javascript(flash[:success]) %></p>").appendTo("#search-form")
 
+console.log("this should be before things break");
 
+$("<div>
+  <li><%=j @bookmark.title %></li>
+  <li><%=j @bookmark.image %></li>
+  <li><%=j @bookmark.description %></li>
+  <li><%=j @bookmark.location %></li>
+  <li><%=j @bookmark.time %></li>
+  <li><%=j @bookmark.date.strftime('%Y-%m-%d %I:%M%P') %></li>
+  <li><%=j @bookmark.created_at.strftime('%Y-%m-%d %I:%M%P') %></li>
+  <li><%=j @bookmark.updated_at.strftime('%Y-%m-%d %I:%M%P') %></li>
+  <li><%=j link_to 'Edit', [:edit, @bookmark]%></li>
+  <li><%=j link_to 'Delete Bookmark', @bookmark, :method => :delete, data: {confirm: 'Are you sure?}%></li>
+  <li><%=j link_to ;Add as a reminder' %></li>
+  </div>").appendTo("#all-bookmarks");
+
+console.log("I've rendered!!!!!!!")

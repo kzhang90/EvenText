@@ -15,9 +15,9 @@
             <li><%= bookmark.url %></li>
             <li><%= link_to "Edit", [:edit, bookmark]%></li>
             <li><%= link_to "Delete Bookmark", bookmark, :method => :delete, data: {confirm: "Are you sure?"}%></li>
+            <li><%= link_to "Add as a reminder" %></li>
     </div>
     <% end %>
-
 
 <h2>Add a bookmark below:</h2>
 
