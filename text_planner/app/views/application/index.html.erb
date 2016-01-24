@@ -1,23 +1,29 @@
-<h1>Single Page App</h1>
-<p>Home page after logging in</p>
-<!-- new search, show clickable search results,  -->
-<!-- single page app with search bar and results being displayed. -->
-<!-- search form -->
-<div id="search-form">
-  <%= simple_form_for :search, remote: true, :url => search_apis_path, html: { method: :get, id: :search_me } do |f| %>
-    <%= f.input :keyword, :placeholder => 'keyword', input_html: { name: :keyword } %>
-    <%= f.input :city, :placeholder => 'city', input_html: { name: :city } %>
-    <%= f.input :start_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :start_date } %>
-    <%= f.input :end_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :end_date } %>
-    <%= f.button :submit, "Submit" %>
-  <% end %>
+<div class="container-fluid">
+
+  <h2 class="text-center">Search For An Event!</h2>
+
+  <div class="row">
+    <div id="search-form" class="col-xs-8 col-xs-offset-2">
+      <%= simple_form_for :search, remote: true, :url => search_apis_path, html: { method: :get, id: :search_me } do |f| %>
+        <%= f.input :keyword, :placeholder => 'keyword', input_html: { name: :keyword } %>
+        <%= f.input :city, :placeholder => 'city', input_html: { name: :city } %>
+        <%= f.input :start_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :start_date } %>
+        <%= f.input :end_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :end_date } %>
+        <%= f.button :submit, "Submit" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    
+
+    <!-- style this flash notice and use jquery to manipulate the background color-->
+    <div id="flash-notice"></div>
+
+    <!-- append to below, in some order, with some format, limit results to ~10 -->
+    <div id="api-results"></div>
+
+  </div>
 </div>
-
-<!-- style this flash notice and use jquery to manipulate the background color-->
-<div id="flash-notice"></div>
-
-<!-- append to below, in some order, with some format, limit results to ~10 -->
-<div id="api-results"></div>
 
 
 
