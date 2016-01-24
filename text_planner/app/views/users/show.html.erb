@@ -1,13 +1,26 @@
-<h2><%= current_user.first_name %> <%=current_user.last_name %>'s Profile</h2>
+<!-- "my" or current user? -->
+<div class="container-fluid">
+  <h2><%= @user.first_name + " " + @user.last_name %>'s Profile</h2>
+  
+  <p><%= link_to "Find Some Friends!", users_path %></p>
 
 
+  <h4><%= @user.first_name + " " + @user.last_name %>'s Friends</h4>
+  <ul>
+    <% for friendship in @user.friendships %>
+      <li>
+        <%= friendship.friend.first_name %>
+        (<%= link_to "Remove", friendship, :method => :delete %>)
+      </li>
+      <% end %>
+  </ul>
 
-<h4>Friends</h4>
-<ul>
-  <% for friendship in @user.friendships %>
-    <li>
-      <%= h friendship.friend.username %>
-      (<%= link_to "Remove", friendship_path(friendship), :method => :delete %>)
-    </li>
+  <h4>Followers</h4>
+  <ul>
+    <% for user in @user.inverse_friends %>
+    <li><%= user.first_name + " " + user.last_name%></li>
     <% end %>
-</ul>
+  </ul>
+
+</div>
+

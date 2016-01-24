@@ -9,7 +9,7 @@ class Reminder < ActiveRecord::Base
   @@SEND_TEXT_MESSAGE_TIME = 1.minutes
 
   def send_text_message
-    # each bookmark will have an option to send_text_message_path
+
     number_to_send_to = "+"+@user.phone_number.to_s
     body = "testing"
 

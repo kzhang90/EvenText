@@ -10,10 +10,12 @@ Rails.application.routes.draw do
     resources :bookmarks, shallow: true, except: [:new]
     # resources :comments, shallow: true, only: [:index, :update]
     # index of user's comments will be on user's profile, can they destroy?!
-    resources :friendships, shallow: true, only: [:index, :create, :destroy]
+    # resources :friendships, shallow: true, only: [:index, :create, :destroy]
     # research twilio and decide below:
     resources :reminders, shallow: true
   end
+
+  resources :friendships
 
   # bookmarks will not have comments in MVP
   # resources :bookmarks, only: [] do

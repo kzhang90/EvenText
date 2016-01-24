@@ -1,23 +1,14 @@
 class FriendshipsController < ApplicationController
-  
-  def index
-    # show all of my friends
-    # pass all of my friends to my profile view
-  end
 
   def create
-    # take current user model and build a friendship through it
-    # call friend id and pass in friend id parameter from url which is passed in from the previous request
-    # friend_id from previous request is the friend_id  you use to build the friendship
-    @friendship = current_user.friendships.build(:friend_id => params[:user_id])
+    @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
       flash[:notice] = "Added friend successfully."
-      # redirect_to profile page
-      redirect_to current_user
+      redirect_to users_path
     else
       flash[:error] = "Unable to add friend."
-      # redirect to where?
-      redirect_to current_user
+      redirect_to users_path
+    end
   end
 
   def destroy

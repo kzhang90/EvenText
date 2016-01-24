@@ -1,14 +1,11 @@
 <!-- list of all the users -->
-<% t "User List" %>
-
-<div id="users">
-  <% for user in @users %>
-    <div class="users">
-      <p>
-        <strong><%= user.first_name %></strong>
-        <%= link_to "Add Friend", user_friendships_path(:friend_id => user.id)%>
-        <div class="clear"></div>
-      </p>
-    </div>
-  <% end %>
+<div class="container fluid">
+  <ul id="users">
+    <% for user in @users %>
+      <li class="users">
+          <span><strong><%= user.first_name + " " + user.last_name %></strong>
+          <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></span>
+      </li>
+    <% end %>
+  </ul>
 </div>
