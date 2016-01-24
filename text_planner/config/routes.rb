@@ -15,8 +15,6 @@ Rails.application.routes.draw do
     resources :reminders, shallow: true
   end
 
-
-
   # bookmarks will not have comments in MVP
   # resources :bookmarks, only: [] do
   #   resources :comments, shallow: true

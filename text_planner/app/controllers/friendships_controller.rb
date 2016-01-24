@@ -2,6 +2,7 @@ class FriendshipsController < ApplicationController
   
   def index
     # show all of my friends
+    # pass all of my friends to my profile view
   end
 
   def create
