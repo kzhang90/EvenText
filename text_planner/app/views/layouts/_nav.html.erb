@@ -1,43 +1,23 @@
-<!-- <p class="navbar-text pull-right"> -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav id="mainNav" class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        Text Planner
-      </a>
+        <%= link_to "Plan To Text", home_path, class: "navbar-brand" %>
     </div>
 
-    
-    <% if user_signed_in? %>
-
-      
-      <p class="navbar-text navbar-left">Welcome, <strong><%= current_user.first_name.to_s+" "+current_user.last_name.to_s %></strong></p>
-
-        <div class="nav navbar-nav navbar-right">
-          <%= link_to "Home", home_path, :class => 'btn btn-default navbar-button' %>
-          <div class="btn btn-default dropdown-toggle navbar-button" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu</div>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Search For Events", root_path %></li>
-                <li><%= link_to "My Bookmarks", user_bookmarks_path(current_user.id)%></li>
-                <li><%= link_to "My Reminders", user_reminders_path(current_user.id)%></li>
-                <li><%= link_to "My Profile", user_path(current_user.id)%></li>
-                <li><%= link_to "All Users", users_path %></li>
-                <li role="separator" class="divider"></li>
-                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-              </ul>
-        </div>
-  
-
-
-    <% else %>
-
-
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Home", home_path, :class => 'navbar-text' %></li>
-          <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-text'  %></li>
-          <li><%= link_to "Login", new_user_session_path, :class => 'navbar-text'  %></li>
-        </ul>
-    <% end %>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <li><%= link_to "Hello, #{current_user.first_name}!", user_path(current_user)%></li>
+          <li><%= link_to "My Bookmarks", user_bookmarks_path(current_user.id)%></li>
+          <li><%= link_to "My Reminders", user_reminders_path(current_user.id)%></li>
+          <li><%= link_to "All Users", users_path %></li>            
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Login", new_user_session_path %></li>
+          <li><%= link_to "Signup", new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </div>
 
   </div>
 </nav>

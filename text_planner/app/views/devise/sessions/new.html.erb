@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <h2>Log in</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -14,6 +15,6 @@
   </div>
 <% end %>
 
-<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
-
 <%= render "devise/shared/links" %>
+
+</div>
