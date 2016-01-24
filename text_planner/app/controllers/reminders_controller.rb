@@ -1,27 +1,26 @@
 class RemindersController < ApplicationController
   
+  before_action :set_reminder, only: [:show, :edit, :update, :destroy]
+
   def index
     @reminders = current_user.reminders
     @reminder = Reminder.new
     @user = User.find_by_id params[:user_id]
+    if @reminders.length == 0
+      flash[:notice] = "You have no reminders scheduled. Create one now to get started."
+    end
   end
 
-  def send_text_message
-    # each bookmark will have an option to send_text_message_path
-    number_to_send_to = "+"+current_user.phone_number.to_s
-
-    twilio_sid = ENV['TWILIO_ACCOUNT_SID']
-    twilio_token = ENV['TWILIO_AUTH_TOKEN']
-    twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
-
-    @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
-
-    @twilio_client.account.sms.messages.create(
-      :from => "#{twilio_phone_number}",
-      :to => number_to_send_to,
-      :body => "#{title} at #{location} is happening at #{time}. Info: #{description}"
-
-      )
+  def destroy
+    @reminder.destroy
+    respond_to do |format|
+      format.html { redirect_to reminders_url, notice: 'reminder was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
+  private
+  def set_reminder
+    @reminder = Reminder.find(params[:id])
+  end
 end

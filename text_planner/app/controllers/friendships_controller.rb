@@ -8,7 +8,7 @@ class FriendshipsController < ApplicationController
     # take current user model and build a friendship through it
     # call friend id and pass in friend id parameter from url which is passed in from the previous request
     # friend_id from previous request is the friend_id  you use to build the friendship
-    @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
+    @friendship = current_user.friendships.build(:friend_id => params[:user_id])
     if @friendship.save
       flash[:notice] = "Added friend successfully."
       # redirect_to profile page
