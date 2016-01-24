@@ -36,7 +36,13 @@ class BookmarksController < ApplicationController
     end
   end
 
-  def edit 
+  def show
+    @user = current_user
+    @reminder = Reminder.new
+    @bookmark = Bookmark.find(params[:id])
+  end
+
+  def edit
     @bookmark = Bookmark.find(params[:id])
   end
 

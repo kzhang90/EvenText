@@ -1,6 +1,5 @@
 class RemindersController < ApplicationController
   
-  before_action :set_reminder, only: [:show, :edit, :update, :destroy]
 
   def index
     @user = User.find_by_id params[:user_id]
@@ -11,41 +10,43 @@ class RemindersController < ApplicationController
   end
 
   def new
+    @user = User.find_by_id params[:user_id]
+    @reminder = @user.reminders.build
   end
 
   def create
-    @reminder = Reminder.new(params[:reminder])
-    @reminder.user_id = current_user.id
-    # if saved
+    @user = current_user
+    @reminder = @user.reminders.build reminder_params
+
     respond_to do |format|
       if @reminder.save
         flash[:success] = 'Reminder was created successfully!'
         format.html {
-          redirect_to user_reminders_path(current_user.id)
+          redirect_to user_reminders_path(@user)
         }
       else
-        flash[:notice] = 'Reminder could not be created. Please try again.'
+        flash.now[:notice] = 'Reminder could not be created. Please try again.'
         format.html {
-          redirect_to new_user_reminders_path
+          render :new
         }
         format.json {
           render json: @reminder.errors.full_messages
         }
-    # else
+
       end
     end
   end
 
   def show
-    @reminder
+    @reminder = Reminder.find(params[:id])
   end
 
   def edit
-    @reminder 
+    @reminder = Reminder.find(params[:id])
   end
 
   def update
-    # @reminder.user_id = current_user.id
+   @reminder = Reminder.find(params[:id])
 
     respond_to do |format|
       if @reminder.update_attributes(reminder_params)
@@ -69,15 +70,17 @@ class RemindersController < ApplicationController
   end
 
   def destroy
+    @reminder = Reminder.find(params[:id])
     @reminder.destroy
     respond_to do |format|
-      format.html { redirect_to reminders_url, notice: 'reminder was successfully destroyed.' }
+      format.html { redirect_to user_reminders_path, notice: 'reminder was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-  def set_reminder
-    @reminder = Reminder.find(params[:id])
+
+  def reminder_params
+    params.require(:reminder).permit(:title, :time)
   end
 end

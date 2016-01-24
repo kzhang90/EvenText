@@ -1,4 +1,4 @@
-<%= simple_form_for ([@user, @reminder])} do |f| %>
+<%= simple_form_for ([@user, @reminder]) do |f| %>
 
   <% if @reminder.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -15,15 +15,9 @@
     </div>
   <% end %>
 
-    <%= f.input :name %>
-    <%= f.input :phone_number %>
+    <%= f.input :title %>
     <%= f.input :time %>
-    <%= f.input :body %>
-    <!-- Rails expects time_select when dealing with ActiveRecord forms -->
-    <%= time_select :reminder, :time, {:class => "form-control" } %>
-    <%= date_select :reminder, :time, {:class => "form-control" } %>
-    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
     <%= f.button :submit %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-        reminders_path, :class => 'btn btn-default' %>
+        user_reminders_path(current_user.id), :class => 'btn btn-default' %>
 <% end %>

@@ -1,8 +1,6 @@
 class Reminder < ActiveRecord::Base
   validates :title, presence: true
-  validates :phone_number, presence: true
   validates :time, presence: true
-  validates :body, presence: true
   # may need to make changes here
   belongs_to :user
 
@@ -11,7 +9,6 @@ class Reminder < ActiveRecord::Base
   @@SEND_TEXT_MESSAGE_TIME = 60.minutes
 
   def send_text_message
-    binding.pry
     # each bookmark will have an option to send_text_message_path
     number_to_send_to = "+"+user.phone_number.to_s
     body = 
@@ -24,8 +21,7 @@ class Reminder < ActiveRecord::Base
     @twilio_client.account.sms.messages.create(
       :from => "#{twilio_phone_number}",
       :to => number_to_send_to,
-      :body =>
-
+      :body => body
       )
   end
 
