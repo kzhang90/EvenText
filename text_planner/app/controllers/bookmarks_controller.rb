@@ -14,7 +14,7 @@ class BookmarksController < ApplicationController
 
     respond_to do |format|
       if @bookmark.save
-        flash.now[:success] = 'Bookmark was successfully created!'
+        flash.now[:success] = 'Bookmark was created successfully!'
         format.html { 
           redirect_to user_bookmarks_path
         }
@@ -24,7 +24,7 @@ class BookmarksController < ApplicationController
         # when theres an ajax call, the flash messages aren't appending.
         format.js {}
       else
-        flash.now[:notice] = "Bookmark could not be created."
+        flash.now[:notice] = "Bookmark could not be created. Please try again."
         format.html {
           render :index
         }

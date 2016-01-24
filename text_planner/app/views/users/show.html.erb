@@ -1,6 +1,8 @@
 <h2><%= current_user.first_name %> <%=current_user.last_name %>'s Profile</h2>
 
-<h4>My Friends</h4>
+
+
+<h4>Friends</h4>
 <ul>
   <% for friendship in @user.friendships %>
     <li>

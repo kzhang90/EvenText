@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     @users = User.all
     # these are all of the users. 
     # separate link or no?
+    # if it's my own profile that I click on, I can view everything, MANAGE PERMISSIONS!!
   end
 
   def show

@@ -1,1 +1,8 @@
 <!-- list of all friendships? -->
+<% @user.friendships do |friendship| %>
+  <%= friendship.name %>
+
+
+
+  <%= link_to "Back", :back %>
+<% end %>
