@@ -2,18 +2,18 @@
 <ul id="all-bookmarks">
     <% @bookmarks.each do |bookmark| %>
     <li class="bookmark-div">
-            <div><%= bookmark.title %></div>
-            <div><%= bookmark.image %></div>
-            <div><%= bookmark.description %></div>
-            <div><%= bookmark.location %></div>
-            <div><%= bookmark.time %></div>
-            <div><%= bookmark.date %></div>
-            <div><%= bookmark.created_at %></div>
-            <div><%= bookmark.updated_at %></div>
-            <div><%= bookmark.url %></div>
-            <div><%= link_to "Edit", [:edit, bookmark]%></div>
-            <div><%= link_to "Delete", bookmark, method: :delete, data: { confirm: 'Are you sure you want to delete this alert?' }%></div>
-            <div><%= link_to "Add as a reminder", new_user_reminder_path(current_user.id) %></div>
+        <div><%= bookmark.title %></div>
+        <div><%= bookmark.image %></div>
+        <div><%= bookmark.description %></div>
+        <div><%= bookmark.location %></div>
+        <div><%= bookmark.time %></div>
+        <div><%= bookmark.date %></div>
+        <div><%= bookmark.created_at %></div>
+        <div><%= bookmark.updated_at %></div>
+        <div><%= bookmark.url %></div>
+        <div><%= link_to "Edit", [:edit, bookmark]%></div>
+        <div><%= link_to "Delete", bookmark, method: :delete, data: { confirm: 'Are you sure you want to delete this alert?' }%></div>
+        <div><%= link_to "Add bookmark to reminders?", bookmark_path(bookmark.id) %></div>
     </li>
     <% end %>
 </ul>
@@ -34,6 +34,8 @@
             <%= f.button :submit %>
         <% end %>
     </div>
+
+    
 
 
 
