@@ -10,10 +10,10 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:phone_number) %></th>
       <th><%= model_class.human_attribute_name(:time) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:creattitleed_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -21,7 +21,7 @@
     <% @reminders.each do |reminder| %>
       <tr>
         <td><%= link_to reminder.id, reminder_path(reminder) %></td>
-        <td><%= reminder.name %></td>
+        <td><%= reminder.title %></td>
         <td><%= reminder.phone_number %></td>
         <td><%= reminder.time %></td>
         <td><%=l reminder.created_at %></td>
@@ -39,7 +39,7 @@
   </tbody>
 </table>
 
-<%= link_to "New",
-            new_reminder_path,
+<%= link_to "New Reminder",
+            new_user_reminder_path,
             :class => 'btn btn-primary' %>
 
