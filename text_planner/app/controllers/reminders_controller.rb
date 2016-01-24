@@ -32,7 +32,6 @@ class RemindersController < ApplicationController
         format.json {
           render json: @reminder.errors.full_messages
         }
-
       end
     end
   end
@@ -47,6 +46,7 @@ class RemindersController < ApplicationController
 
   def update
    @reminder = Reminder.find(params[:id])
+   @reminder.user_id = current_user.id
 
     respond_to do |format|
       if @reminder.update_attributes(reminder_params)
@@ -73,7 +73,7 @@ class RemindersController < ApplicationController
     @reminder = Reminder.find(params[:id])
     @reminder.destroy
     respond_to do |format|
-      format.html { redirect_to user_reminders_path, notice: 'reminder was successfully destroyed.' }
+      format.html { redirect_to user_reminders_path(current_user.id), notice: 'reminder was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

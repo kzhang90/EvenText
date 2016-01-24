@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
 
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+  protect_from_forgery with: :exception
+  
   def index
   end
 
@@ -16,22 +16,15 @@ class ApplicationController < ActionController::Base
     keyword = params[:keyword].to_s
     city = params[:city].to_s
 
-    # yelp API
-    # parameters = { term: params[:term], limit: }
-    # render json: Yelp.client.search('San Francisco', parameters)
-
     response = JSON.parse RestClient.get('https://www.eventbriteapi.com/v3/events/search?q='+
       keyword+'&sort_by=best&venue.city='+city+'&start_date.range_start='+
       start_date+'T00:00:00Z&start_date.range_end='+end_date+
       'T00:00:00Z',
-        {:Authorization => 'Bearer H3MJZUEJ6CMP2XNVST3C'}
-      )
-    # use line 28 to view response, then comment out and uncomment 29 & 30 for the actual view code
-    # render json: response
+        {
+          :Authorization => ENV['EVENTBRITE_AUTH']
+        })
+
     @events = response["events"]
-    # make an array of bookmarks
-    # need to handle empty responses.
-    # function that sets empty string if undefined
 
     @bookmarks = @events.map {
       |event| Bookmark.new(
@@ -42,13 +35,18 @@ class ApplicationController < ActionController::Base
         time: event["start"]["local"].split("T")[1],
         url: event["url"]
     )}
-    # @events is an array of objects where the top 10 are displayed 
-    # data in js file is @events once it is rednered as :json
+
     respond_to do |format|
       format.js {}
       format.json {render :json => @bookmarks, location: @bookmarks}
     end
-    # render :index
   end
 
+
+  protected
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :phone_number, :username, :email, :password, :password_confirmation) }
+      devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:first_name, :last_name, :phone_number, :username, :email, :password, :password_confirmation) }
+    end
+    
 end
