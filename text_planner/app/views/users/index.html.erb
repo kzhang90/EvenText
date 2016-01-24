@@ -1,12 +1,12 @@
 <!-- list of all the users -->
-<% title "User List" %>
+<% t "User List" %>
 
 <div id="users">
   <% for user in @users %>
     <div class="users">
       <p>
-        <strong><%= user.username %></strong>
-        <%= link_to "Add Friend", friendships_path(:friend_id => user)%>
+        <strong><%= user.first_name %></strong>
+        <%= link_to "Add Friend", user_friendships_path(:friend_id => user.id)%>
         <div class="clear"></div>
       </p>
     </div>
