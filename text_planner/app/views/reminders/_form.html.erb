@@ -17,7 +17,8 @@
 
     <%= f.input :name %>
     <%= f.input :phone_number %>
-    <%= f.label :time, "Time and Date" %>
+    <%= f.input :time %>
+    <%= f.input :body %>
     <!-- Rails expects time_select when dealing with ActiveRecord forms -->
     <%= time_select :reminder, :time, {:class => "form-control" } %>
     <%= date_select :reminder, :time, {:class => "form-control" } %>
