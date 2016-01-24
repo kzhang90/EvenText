@@ -1,6 +1,9 @@
 class RemindersController < ApplicationController
   
   def index
+    @reminders = current_user.reminders
+    @reminder = Reminder.new
+    @user = User.find_by_id params[:user_id]
   end
 
   def send_text_message

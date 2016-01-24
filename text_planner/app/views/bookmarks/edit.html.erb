@@ -15,7 +15,9 @@
     </div>
     </div>
   <% end %>
-  
+
+
+<!-- fix this form!!! -->
 <div class="container">
   <div class="jumbotron">
     <%= simple_form_for [@user,@bookmark] do |f| %>
@@ -25,7 +27,7 @@
     </div>
     <div class="form-group">
       <%= f.label :image %>
-      <%= f.text_field :image, :class => 'search_location form-control', placeholder:'Enter a Country' %>
+      <%= f.text_field :image, :class => 'form-control', placeholder:'Enter an image url' %>
     </div>
     <div class="form-group">
       <%= f.label :description %>
@@ -49,7 +51,7 @@
     </div>
     <div class="form-group">
       <%= f.submit  class: "btn btn-default btn-primary"%>
-      <%= link_to 'Cancel', root_path, class: "btn btn-danger"  %>
+      <%= link_to 'Cancel', user_bookmarks_path(current_user.id), class: "btn btn-danger"  %>
     </div>
     <% end -%>
   </div>

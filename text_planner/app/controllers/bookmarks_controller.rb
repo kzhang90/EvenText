@@ -10,19 +10,21 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new bookmark_params
     @bookmark.user_id = current_user.id
 
+# flash sticks around for the next one. flash.now will 
+
     respond_to do |format|
       if @bookmark.save
+        flash.now[:success] = 'Bookmark was successfully created!'
         format.html { 
-          redirect_to user_bookmarks_path,
-          notice: 'Bookmark was successfully created.'
+          redirect_to user_bookmarks_path
         }
         format.json { 
-          render json: @bookmark,
-          status: :created, 
-          location: @bookmark
+          render json: @bookmark
         }
+        # when theres an ajax call, the flash messages aren't appending.
         format.js {}
-      else 
+      else
+        flash.now[:notice] = "Bookmark could not be created."
         format.html {
           render :index
         }
@@ -39,48 +41,52 @@ class BookmarksController < ApplicationController
   end
 
   def update
+    # add error handling in update bookmark
     @bookmark = Bookmark.find(params[:id])
     @bookmark.user_id = current_user.id
 
     respond_to do |format|
-      if @bookmark.update_attributes(params[:bookmark])
+
+      if @bookmark.update_attributes(bookmark_params)
+        flash[:success]= 'Bookmark has been successfully updated.'
         format.html {
-          redirect_to user_bookmarks_path,
-          notice: 'Bookmark has been successfully updated.'
+          redirect_to user_bookmarks_path(current_user.id)
         }
         format.json {
           render json: @bookmark
         }
       else
         # debug this
+        flash[:error] = 'Bookmark could not be updated. Please try again.'
         format.html {
-          redirect_to edit_bookmarks_path,
-          notice: 'Bookmark could not be updated. Please try again.'
+          redirect_to edit_bookmarks_path
         }
         format.json {
           render json: @bookmark.errors.full_messages
         }
       end
+
     end
   end
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
-
     respond_to do |format|
+
       if @bookmark.destroy
+        # WORKING.
+        # since it redirects the page, use flash
+        flash[:success]='Bookmark has been successfully deleted.'
         format.html {
-          redirect_to user_bookmarks_path(current_user.id),
-          notice: 'Bookmark has been successfully deleted.'
-        }
-        format.js {}    
+          redirect_to user_bookmarks_path(current_user.id)
+        }   
       else
+        flash[:error]='Bookmark could not be deleted.'
         format.html {
-          redirect_to user_bookmarks_path(current_user.id),
-          error: 'Bookmark could not be deleted.'
+          redirect_to user_bookmarks_path(current_user.id)
         }
-        format.js {}
       end
+
     end
   end
 

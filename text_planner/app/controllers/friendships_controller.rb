@@ -1,6 +1,7 @@
 class FriendshipsController < ApplicationController
   
   def index
+    # show all of my friends
   end
 
   def create

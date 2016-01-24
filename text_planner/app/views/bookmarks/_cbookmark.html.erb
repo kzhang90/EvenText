@@ -1,0 +1,12 @@
+<li>
+  <div><%= bookmark.image %></div>
+  <div><%= bookmark.description %></div>
+  <div><%= bookmark.location %></div>
+  <div><%= bookmark.time %></div>
+  <div><%= bookmark.date.strftime('%Y-%m-%d %I:%M%P') %></div>
+  <div><%= bookmark.created_at.strftime('%Y-%m-%d %I:%M%P') %></div>
+  <div><%= bookmark.updated_at.strftime('%Y-%m-%d %I:%M%P') %></div>
+  <div><%= link_to 'Edit', [:edit, bookmark]%></div>
+  <div><%= link_to 'Delete Bookmark', bookmark, method: :delete, data: { confirm: 'Are you sure you want to delete this alert?' }%></div>
+  <div><%= link_to 'Add as a reminder' %></div>
+</li>
