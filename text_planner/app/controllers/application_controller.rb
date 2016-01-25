@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
 
     render :json => @st.to_json
   end
-
+# take js controller is sending and js is transposing json to html
   protected
 
   def configure_permitted_parameters

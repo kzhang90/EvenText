@@ -39,15 +39,10 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id])
     if @bookmark.destroy
       flash[:notice] = "successfully deleted!"
-      format.js {
-        # in js file just remove the selected element
-      }
     else
       render
     end
 
-    # # success below?
-    # render json: {}
     redirect_to user_bookmarks_path(current_user.id)
   end
 
