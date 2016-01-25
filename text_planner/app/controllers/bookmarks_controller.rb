@@ -19,7 +19,6 @@ class BookmarksController < ApplicationController
 
   def edit
     @bookmark = Bookmark.find(params[:id])
-    # renders edit page
   end
 
   def update
@@ -30,7 +29,7 @@ class BookmarksController < ApplicationController
       render json: {errors: @bookmark.errors.full_messages}
     end
   end
-  
+
   def show
     @user = current_user
     @reminder = Reminder.new

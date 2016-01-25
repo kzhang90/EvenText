@@ -6,7 +6,7 @@
                 <% @bookmarks.each do |bookmark| %>
                 <tr class="bookmark-div">
                     <div><%= bookmark.title %></div>
-                    <div><%= bookmark.image %></div>
+                    <div><img src="<%= bookmark.image %>"></div>
                     <div><%= bookmark.description %></div>
                     <div><%= bookmark.location %></div>
                     <div><%= bookmark.time %></div>
@@ -37,7 +37,7 @@
                     <%= f.input :description %>
                     <%= f.input :location %>
                     <%= f.input :date %>
-                    <%= f.button :submit %>
+                    <%= f.button :submit%>
                 <% end %>
             </div>
 

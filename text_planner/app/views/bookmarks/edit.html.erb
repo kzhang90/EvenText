@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <h2>Edit Bookmark <%= @bookmark.title %></h2>
 
 <% if @bookmark.errors.any? %>
@@ -15,7 +16,7 @@
     </div>
     </div>
   <% end %>
-  
+  <!-- turn into simple form -->
 <div class="container">
   <div class="jumbotron">
     <%= form_for [@user,@bookmark] do |f| %>
@@ -53,4 +54,6 @@
     </div>
     <% end -%>
   </div>
+</div>
+
 </div>

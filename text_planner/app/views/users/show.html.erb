@@ -3,10 +3,13 @@
   <div class="row">
     <h2 class="text-center"><%= @user.first_name + " " + @user.last_name %>'s Profile</h2>
   </div>
+  <%= @user.inspect %>
   <div class="row">
     <div class="col-xs-4">
       <!-- profile picture -->
-
+      <div id="profile-picture">
+      <img src=<%= @user.profile_picture %>>
+      </div>
       <%= link_to "Edit Profile Info", edit_user_registration_path(current_user) %>
     </div>
     <div class="col-xs-4">

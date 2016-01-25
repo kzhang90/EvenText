@@ -25,6 +25,6 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
     end
   end
-  validates_presence_of :first_name, :last_name, :email, :phone_number
+  validates_presence_of :first_name, :last_name, :email, :phone_number, :profile_picture
 
 end

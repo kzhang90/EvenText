@@ -14,15 +14,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-body {
-  padding-top: 60px;
-}
-@media (max-width: 979px) {
-  body {
-    padding-top: 0px;
-  }
-}
+// body {
+//   padding-top: 60px;
+// }
+// @media (max-width: 979px) {
+//   body {
+//     padding-top: 0px;
+//   }
+// }
 
-
+#eventbrite-search input {
+  width: 100%;
+  clear: both;
+}
 
 
