@@ -6,6 +6,8 @@
   <div class="row">
     <div class="col-xs-4">
       <!-- profile picture -->
+
+      <%= link_to "Edit Profile Info", edit_user_registration_path(current_user) %>
     </div>
     <div class="col-xs-4">
       <h4><%= @user.first_name + " " + @user.last_name %> follows:</h4>
