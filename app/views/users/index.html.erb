@@ -1,0 +1,12 @@
+<!-- list of all the users -->
+<div class="container fluid">
+  <ul id="users">
+    <% for user in @users %>
+      <li class="users">
+        <!-- if user.id == current_user.id, hide. -->
+          <span><%= link_to user.first_name, users_path(user) %></strong>
+          (<%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>)</span>
+      </li>
+    <% end %>
+  </ul>
+</div>

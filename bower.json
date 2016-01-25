@@ -1,0 +1,27 @@
+{
+  "name": "y",
+  "homepage": "https://github.com/kzhang90/text-planner",
+  "authors": [
+    "Kenny Zhang <Kenny.y.zhang@gmail.com>"
+  ],
+  "description": "y",
+  "main": "n",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "angular": "~1.4.8"
+  },
+  "dependencies": {
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.6"
+  }
+}
