@@ -5,7 +5,7 @@ class Reminder < ActiveRecord::Base
 
   after_create :send_text_message
 
-  # change this when can
+  # change this when possible
   @@SEND_TEXT_MESSAGE_TIME = 1.minutes
 
   def send_text_message
