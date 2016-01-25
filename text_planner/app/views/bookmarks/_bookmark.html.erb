@@ -1,4 +1,4 @@
-<div>
+<div class="api-bookmark results">
   <%= simple_form_for bookmark, :url => user_bookmarks_path(current_user, bookmark), :remote => true, :method => :post do |f| %>
   <%= f.hidden_field :title, { :value => bookmark["title"]} %>
   <%= f.hidden_field :image, { :value => bookmark["image"]} %>
