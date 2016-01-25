@@ -36,6 +36,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'rails_12factor', :group => :production
 gem 'puma'
+ruby '2.0.0'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
