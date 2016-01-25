@@ -1,24 +1,85 @@
 class RemindersController < ApplicationController
   
   def index
+    @user = User.find_by_id params[:user_id]
+    @reminders = @user.reminders
+    if @reminders.length == 0
+      flash[:notice] = 'You have no reminders scheduled. Create one now to get started.'
+    end
   end
 
-  def send_text_message
-    # each bookmark will have an option to send_text_message_path
-    number_to_send_to = "+"+current_user.phone_number.to_s
-
-    twilio_sid = ENV['TWILIO_ACCOUNT_SID']
-    twilio_token = ENV['TWILIO_AUTH_TOKEN']
-    twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
-
-    @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
-
-    @twilio_client.account.sms.messages.create(
-      :from => "#{twilio_phone_number}",
-      :to => number_to_send_to,
-      :body => "#{title} at #{location} is happening at #{time}. Info: #{description}"
-
-      )
+  def new
+    @user = User.find_by_id params[:user_id]
+    @reminder = @user.reminders.build
   end
 
+  def create
+    @user = current_user
+    @reminder = @user.reminders.build reminder_params
+
+    respond_to do |format|
+      if @reminder.save
+        flash[:success] = 'Reminder was created successfully!'
+        format.html {
+          redirect_to user_reminders_path(@user)
+        }
+      else
+        flash.now[:notice] = 'Reminder could not be created. Please try again.'
+        format.html {
+          render :new
+        }
+        format.json {
+          render json: @reminder.errors.full_messages
+        }
+      end
+    end
+  end
+
+  def show
+    @reminder = Reminder.find(params[:id])
+  end
+
+  def edit
+    @reminder = Reminder.find(params[:id])
+  end
+
+  def update
+   @reminder = Reminder.find(params[:id])
+   @reminder.user_id = current_user.id
+
+    respond_to do |format|
+      if @reminder.update_attributes(reminder_params)
+        flash[:success] = 'Reminder has been successfully updated.'
+        format.html {
+          redirect_to user_reminders_path(current_user.id)
+        }
+        format.json {
+          render json: @reminder
+        }
+      else
+        flash[:error] = 'Reminder could not be updated.'
+        format.html {
+          redirect_to edit_bookmarks_path
+        }
+        format.json {
+          render json: @reminder.errors.full_messages
+        }
+      end
+    end
+  end
+
+  def destroy
+    @reminder = Reminder.find(params[:id])
+    @reminder.destroy
+    respond_to do |format|
+      format.html { redirect_to user_reminders_path(current_user.id), notice: 'reminder was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def reminder_params
+    params.require(:reminder).permit(:title, :time)
+  end
 end
