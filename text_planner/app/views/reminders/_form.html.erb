@@ -1,4 +1,4 @@
-<%= simple_form_for ([@user, @reminder]) do |f| %>
+<%= simple_form_for [@user, @reminder] do |f| %>
 
   <% if @reminder.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
