@@ -32,8 +32,7 @@ gem 'twilio-ruby'
 gem 'rest-client'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'delayed_job_active_record'
-gem 'daemons'
+gem 'yelp', require: 'yelp'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -1,30 +1,56 @@
 <h2>Edit Bookmark <%= @bookmark.title %></h2>
 
-<%= simple_form_for [@user, @bookmark] do |f| %>
-
-  <% if @bookmark.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@bookmark.errors.count, "error") %> prohibited this bookmark from being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
+<% if @bookmark.errors.any? %>
+  <div id="error_explanation" class="container">
+    <div class="col-md-8 col-md-offset-2">
+      <h2>
+        <%= pluralize(@bookmark.errors.count, "error") %> prohibited
+        this bookmark from being saved:
+      </h2>
+      <ul>
         <% @bookmark.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
-        </ul>
-      </div>
+      </ul>
+    </div>
     </div>
   <% end %>
-
-  <%= f.input :title %>
-  <%= f.input :image %>
-  <%= f.input :description %>
-  <%= f.input :location %>
-  <%= f.input :time %>
-  <%= f.input :date %>
-  <%= f.input :url %>
-  <%= f.button :submit %>
-  <%= link_to 'Cancel', user_bookmarks_path(current_user.id), class: "btn btn-danger"  %>
-<% end %>
-
+  
+<div class="container">
+  <div class="jumbotron">
+    <%= form_for [@user,@bookmark] do |f| %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :image %>
+      <%= f.text_field :image, :class => 'search_location form-control', placeholder:'Enter a Country' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_field :description, class:'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :location %>
+      <%= f.text_area :location, class:'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :time %>
+      <%= f.text_field :time, class:'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :date %>
+      <%= f.text_field :date, class:'form-control', placeholder:"" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :url %>
+      <%= f.text_field :url, class:'form-control', placeholder:"" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit  class: "btn btn-default btn-primary"%>
+      <%= link_to 'Cancel', root_path, class: "btn btn-danger"  %>
+    </div>
+    <% end -%>
+  </div>
+</div>

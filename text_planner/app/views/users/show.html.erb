@@ -1,47 +1,11 @@
-<!-- "my" or current user? -->
-<div class="container-fluid">
-  <div class="row">
-    <h2 class="text-center"><%= @user.first_name + " " + @user.last_name %>'s Profile</h2>
-  </div>
-  <div class="row">
-    <div class="col-xs-4">
-      <!-- profile picture -->
+<h2><%= current_user.first_name %> <%=current_user.last_name %>'s Profile</h2>
 
-      <%= link_to "Edit Profile Info", edit_user_registration_path(current_user) %>
-    </div>
-    <div class="col-xs-4">
-      <h4><%= @user.first_name + " " + @user.last_name %> follows:</h4>
-        <ul>
-        <% for friendship in @user.friendships %>
-          <li>
-            <%= friendship.friend.first_name %>
-            (<%= link_to "Remove", friendship, :method => :delete %>)
-          </li>
-        <% end %>
-        </ul>
-  
-
-      <h4>Followers</h4>
-        <ul>
-        <% for user in @user.inverse_friends %>
-          <li><%= user.first_name + " " + user.last_name%></li>
-          <li><%= link_to "User's profile", user_path(user) %></li>
-        <% end %>
-        </ul>
-    </div>
-
-
-    <div class="col-xs-4">
-      <p><%= link_to "Find friends to follow!", users_path %></p>
-    </div>
-  </div>
-  
-  
-
-
-  
-
-  
-
-</div>
-
+<h4>My Friends</h4>
+<ul>
+  <% for friendship in @user.friendships %>
+    <li>
+      <%= h friendship.friend.username %>
+      (<%= link_to "Remove", friendship_path(friendship), :method => :delete %>)
+    </li>
+    <% end %>
+</ul>

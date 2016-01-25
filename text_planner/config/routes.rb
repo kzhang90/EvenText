@@ -7,15 +7,15 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => 'callbacks' }
 
   resources :users, only: [:index, :show] do
-    resources :bookmarks, shallow: true, except: [:new]
+    resources :bookmarks, shallow: true, only: [:index, :edit, :create, :update, :destroy]
     # resources :comments, shallow: true, only: [:index, :update]
     # index of user's comments will be on user's profile, can they destroy?!
-    # resources :friendships, shallow: true, only: [:index, :create, :destroy]
+    resources :friendships, shallow: true, only: [:index, :create, :destroy]
     # research twilio and decide below:
-    resources :reminders, shallow: true
+    resources :reminders, shallow: true, only: [:index]
   end
 
-  resources :friendships
+  get 'reminders_send_text_message', to: 'reminders#send_text_message'
 
   # bookmarks will not have comments in MVP
   # resources :bookmarks, only: [] do

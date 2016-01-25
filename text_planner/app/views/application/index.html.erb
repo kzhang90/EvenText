@@ -1,29 +1,78 @@
-<div class="container-fluid">
+<h1>Single Page App</h1>
+<p>Home page after logging in</p>
+<!-- new search, show clickable search results,  -->
+<!-- single page app with search bar and results being displayed. -->
+<!-- search form -->
+<form>
+  Keyword:<br>
+  <input id="keyword-box" type="text" name="keyword"><br>
+  City:<br>
+  <input id="city-box" type="text" name="city"><br>
+  Start Date:<br>
+  <input id="start-box"type="date" name="start"><br>
+  End Date:<br>
+  <input id="end-box" type="date" name="end"><br>
+</form>
+<% counter = 0 %>
 
-  <h2 class="text-center">Search For An Event!</h2>
+<script>
+  // this is the button to add a bookmark
+  // not truly functionaly but is almost there. if you can fill in the data JSON object with the proper data the post will work
+  // give it a shot as is and see the POST request be made (check rails s console)
+  // params.require(:bookmark).permit(:title, :image, :description, :location, :date, :time, :url)
 
-  <div class="row">
-    <div id="search-form" class="col-xs-8 col-xs-offset-2">
-      <%= simple_form_for :search, remote: true, :url => search_apis_path, html: { method: :get, id: :search_me } do |f| %>
-        <%= f.input :keyword, :placeholder => 'keyword', input_html: { name: :keyword } %>
-        <%= f.input :city, :placeholder => 'city', input_html: { name: :city } %>
-        <%= f.input :start_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :start_date } %>
-        <%= f.input :end_date, :placeholder => 'YYYY-MM-DD', input_html: { name: :end_date } %>
-        <%= f.button :submit, "Submit" %>
-      <% end %>
-    </div>
-  </div>
-  <div class="row">
-    
+  function verifyThat() {
+    if($("#keyword-box").val()!="" && $("#city-box").val()!="" && $("#start-box").val() && $("#end-box").val()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-    <!-- style this flash notice and use jquery to manipulate the background color-->
-    <div id="flash-notice"></div>
+  function applyButton(value) {
+    //somevalue can be replaced with value.url BUT
+    // url MAY contain " OR ' OR other bad characters (replace these with SAFE characters and pass in string)
+    // note that ' was not safe and we had to use &quot; for validity
+    var button = "<button onclick='$.ajax({url:  &quot;/users/"+<%= !@current.nil? ? @current_user.id : 1 %>+"/bookmarks&quot;, dataType: &quot;json&quot;, type: &quot;POST&quot;, data: { bookmark: { title: &quot;"+value.title+"&quot;, image: &quot;"+value.image+"&quot;, description: &quot;"+value.description+"&quot;, location: &quot;"+value.location+"&quot;, date: &quot;"+value.date+"&quot;, time: &quot;"+value.time+"&quot;, url: &quot;"+"somevalue"+"&quot; }}}); $(this).text(&quot;Bookmark Saved&quot;)'>Save Bookmark!</button>";
+    $(button).appendTo("body");
+  }
+</script>
+<button id="searchButton" onclick='if(verifyThat()){$.ajax({
+    url:  "/search_apis",
+    dataType: "json",
+    data: {
+       keyword: $("#keyword-box").val(),
+       city: $("#city-box").val(),
+       start_date: $("#start-box").val(),
+       end_date: $("#end-box").val()
+    },
+    success: function(data) {
+      $.each(data, function(index, value) {
+        $("<div>"+value.title+"</div>").appendTo("body");
+        $("<img src=\""+value.image+"\">").appendTo("body");
+        $("<div>"+value.description+"</div>").appendTo("body");
+        $("<div>"+value.date+"</div>").appendTo("body");
+        $("<div>"+value.time+"</div>").appendTo("body");
+        $("<div>"+value.url+"</div>").appendTo("body");
+        applyButton(value);
+      });
+    }
+    });}
+'>Search!</button>
 
-    <!-- append to below, in some order, with some format, limit results to ~10 -->
-    <div id="api-results"></div>
 
-  </div>
+<!-- display results below -->
+<!-- make div and append response to a div -->
+
+<!-- don't need below?  -->
+
+
+<!-- append to below, in some order, with some format, limit results to ~10 -->
+<div id="api-results">
+  <!-- list -->
 </div>
+
+<!-- make a view in a create  -->
 
 
 
