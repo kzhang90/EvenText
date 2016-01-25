@@ -16,6 +16,7 @@ class FriendshipsController < ApplicationController
       flash[:error] = "Unable to add friend."
       # redirect to where?
       redirect_to current_user
+    end
   end
 
   def destroy

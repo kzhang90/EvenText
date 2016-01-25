@@ -24,7 +24,7 @@ class BookmarksController < ApplicationController
   def update
     @bookmark = Bookmark.find(params[:id])
     if @bookmark.update(bookmark_params)
-      redirect_to index_path, flash: {}
+      redirect_to root_path, flash: {}
     else
       render json: {errors: @bookmark.errors.full_messages}
     end
