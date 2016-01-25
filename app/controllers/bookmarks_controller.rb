@@ -10,10 +10,10 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new bookmark_params
     @bookmark.user_id = current_user.id
     if @bookmark.save
-      render :json => { "success": 200 }
+      render json: @bookmark
     else
       flash.now[:error] = "Bookmark was not created, try again!"
-      render :json => { "failures": 200 }
+      render status: 500
     end
   end
 
