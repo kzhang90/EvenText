@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     end
     @st = @st - [nil]
 
-    render :json => @st.to_json
+    render :json => @st
   end
 # take js controller is sending and js is transposing json to html
   protected

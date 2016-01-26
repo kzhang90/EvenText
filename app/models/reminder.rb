@@ -10,7 +10,7 @@ class Reminder < ActiveRecord::Base
 
   def send_text_message
 
-    number_to_send_to = "+"+@user.phone_number.to_s
+    number_to_send_to = "+"+current_user.phone_number.to_s
     body = "testing"
 
     twilio_sid = ENV['TWILIO_ACCOUNT_SID']
@@ -21,7 +21,7 @@ class Reminder < ActiveRecord::Base
     @twilio_client.account.sms.messages.create(
       :from => "#{twilio_phone_number}",
       :to => number_to_send_to,
-      :body => @user.bookmark.description
+      :body => body
       )
     # find current user in the controller
   end
@@ -32,3 +32,5 @@ class Reminder < ActiveRecord::Base
 
   handle_asynchronously :send_text_message, :run_at => Proc.new { |i| i.when_to_run }
 end
+
+# heroku config:set TWILIO_ACCOUNT_SID=hkjfdshfkjh3kjrh3kjwhk3h32

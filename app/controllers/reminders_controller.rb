@@ -14,11 +14,11 @@ class RemindersController < ApplicationController
   end
 
   def create
-    @user = current_user
-    @reminder = @user.reminders.build reminder_params
+    @reminder = current_user.reminders.build reminder_params
 
     respond_to do |format|
       if @reminder.save
+        # set variables that will be in the twilio txt message
         flash[:success] = 'Reminder was created successfully!'
         format.html {
           redirect_to user_reminders_path(@user)

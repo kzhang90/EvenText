@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3">
-      <h2>Search for an event:</h2>
+      <h2 class="text-center">Search for an event</h2>
 
 
       <form id="eventbrite-search">
@@ -36,11 +36,15 @@
           // note that ' was not safe and we had to use &quot; for validity
           // parsing the json here
           // making the button below
-          var button = "<button onclick='$.ajax({url:  &quot;/users/"+<%= !@current.nil? ? @current_user.id : 1 %>+"/bookmarks&quot;, dataType: &quot;json&quot;, type: &quot;POST&quot;, data: { bookmark: { title: &quot;"+escape(value.title)+"&quot;, image: &quot;"+escape(value.image)+"&quot;, description: &quot;"+escape(value.description)+"&quot;, location: &quot;"+escape(value.location)+"&quot;, date: &quot;"+value.date+"&quot;, time: &quot;"+escape(value.time)+"&quot;, url: &quot;"+escape(value.url)+"&quot; }}}); $(this).text(&quot;Bookmark Saved&quot;)'>Save Bookmark!</button>";
+
+          // temporary fix for single quote problem, fix this later
+          var newValue = value;
+          newValue.description = value.description.replace(/'/g, "");
+          // end temporary fix issue
+          var button = `<button onclick='$.ajax({url:  &quot;/users/"+<%= !@current.nil? ? @current_user.id : 1 %>+"/bookmarks&quot;, dataType: &quot;json&quot;, type: &quot;POST&quot;, data: { bookmark: ${JSON.stringify(newValue)} }}); $(this).text(&quot;Bookmark Saved&quot;)'>Save Bookmark!</button>`;
           $(button).appendTo("body");
         }
-        
-        // append to #bottom-row?
+
         function renderSearchResultPartial(value) {
           $("<div>"+value.title+"</div>").appendTo("body");
           $("<img src=\""+value.image+"\">").appendTo("body");
@@ -64,6 +68,7 @@
             success: function(data) {
               $.each(data, function(index, value) {
                 renderSearchResultPartial(value);
+                <!-- for each of the data in the array that is passed back, append their value individually -->
               });
             }
             });}

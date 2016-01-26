@@ -3,7 +3,6 @@
   <div class="row">
     <h2 class="text-center"><%= @user.first_name + " " + @user.last_name %>'s Profile</h2>
   </div>
-  <%= @user.inspect %>
   <div class="row">
     <div class="col-xs-4">
       <!-- profile picture -->
@@ -28,8 +27,8 @@
         <ul>
         <% for user in @user.inverse_friends %>
           <li><%= user.first_name + " " + user.last_name%></li>
-          <li><%= link_to "User's profile", user_path(user) %></li>
-        <% end %>
+<!--           <li><%= link_to "User's profile", user_path(user) %></li>
+ -->        <% end %>
         </ul>
     </div>
 

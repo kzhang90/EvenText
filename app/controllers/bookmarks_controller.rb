@@ -1,15 +1,15 @@
 class BookmarksController < ApplicationController
 
   def index
-    @bookmarks = current_user.bookmarks
+    @bookmarks = current_user.bookmarks.order('id DESC')
     @bookmark = Bookmark.new
-    @user = User.find_by_id params[:user_id]
   end
 
   def create
     @bookmark = Bookmark.new bookmark_params
     @bookmark.user_id = current_user.id
     if @bookmark.save
+      flash.now[:success] = "Bookmark created successfully!"
       render json: @bookmark
     else
       flash.now[:error] = "Bookmark was not created, try again!"

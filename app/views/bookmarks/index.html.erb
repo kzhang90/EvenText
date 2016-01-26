@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
-            <h2 class="text-center">All of <%= current_user.first_name %>'s Bookmarks</h2>
+            <h2 class="text-center"><%= current_user.first_name %>'s Bookmarks</h2>
             <table id="all-bookmarks">
                 <% @bookmarks.each do |bookmark| %>
                 <tr class="bookmark-div">
@@ -27,16 +27,17 @@
         <h2 class="text-center">Add a bookmark below:</h2>
 
             <div id="post-new-bookmark">
-                <%= simple_form_for [@user, @bookmark], :method => :post, remote: true do |f| %>
+                <%= simple_form_for [current_user, @bookmark], :method => :post, remote: true do |f| %>
                     <% if @bookmark.errors.any? %>
                      <div id="errorExplanation">
                       <h2><%= pluralize(@bookmark.errors.count, "error") %> prohibited this post from being saved:</h2>
                       <% end %>
                     <%= f.input :title %>
+                    <%= f.input :url %>
                     <%= f.input :image %>
                     <%= f.input :description %>
                     <%= f.input :location %>
-                    <%= f.input :date %>
+                    <%= f.input :time %>
                     <%= f.button :submit%>
                 <% end %>
             </div>
@@ -45,14 +46,3 @@
     </div>
 
 </div>
-
-    
-
-
-
-
-
-
-
-
-
