@@ -19,10 +19,9 @@ class ApplicationController < ActionController::Base
 
     response = JSON.parse RestClient.get('https://www.eventbriteapi.com/v3/events/search?q='+
       keyword+'&sort_by=best&venue.city='+city+'&start_date.range_start='+
-      start_date+'T00:00:00Z&start_date.range_end='+end_date+
-      'T00:00:00Z',
+      start_date+'T00:00:00Z&start_date.range_end='+end_date+'T00:00:00Z',
       authorization: ENV['EVENTBRITE']
-      )
+    )
     # use line 28 to view response, then comment out and uncomment 29 & 30 for the actual view code
     # render json: response
     @events = response["events"]

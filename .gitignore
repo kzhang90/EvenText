@@ -16,3 +16,4 @@ secrets.yml
 
 # Ignore application configuration
 /config/application.yml
+/config/app_environment_variables.rb
