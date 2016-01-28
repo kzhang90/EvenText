@@ -18,10 +18,9 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @reminder.save
-        # set variables that will be in the twilio txt message
         flash[:success] = 'Reminder was created successfully!'
         format.html {
-          redirect_to user_reminders_path(@user)
+          redirect_to user_reminders_path
         }
       else
         flash.now[:notice] = 'Reminder could not be created. Please try again.'

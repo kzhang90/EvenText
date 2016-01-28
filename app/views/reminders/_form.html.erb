@@ -1,4 +1,4 @@
-<%= simple_form_for [@user, @reminder] do |f| %>
+<!-- custom reminder -->
 
   <% if @reminder.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -14,6 +14,8 @@
       </div>
     </div>
   <% end %>
+    <!-- manual phone number input for now -->
+    <%= f.input :phone_number
     <%= f.input :title %>
     <%= f.input :time %>
     <%= f.button :submit %>

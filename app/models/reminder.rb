@@ -10,7 +10,7 @@ class Reminder < ActiveRecord::Base
 
   def send_text_message
 
-    number_to_send_to = "+"+current_user.phone_number.to_s
+    number_to_send_to = "+19163653454"
     body = "testing"
 
     twilio_sid = ENV['TWILIO_ACCOUNT_SID']

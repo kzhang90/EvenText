@@ -21,13 +21,13 @@
         // not truly functionaly but is almost there. if you can fill in the data JSON object with the proper data the post will work
         // give it a shot as is and see the POST request be made (check rails s console)
         // params.require(:bookmark).permit(:title, :image, :description, :location, :date, :time, :url)
-        // function verifyThat() {
-        //   if($("#keyword-box").val()!="" && $("#city-box").val()!="" && $("#start-box").val() && $("#end-box").val()) {
-        //     return true;
-        //   } else {
-        //     return false;
-        //   }
-        // }
+        function verifyThat() {
+          if($("#keyword-box").val()!="" && $("#city-box").val()!="" && $("#start-box").val() && $("#end-box").val()) {
+            return true;
+          } else {
+            return false;
+          }
+        }
 
         function applyButton(value) {
           // temporary fix for single quote problem, fix this later
