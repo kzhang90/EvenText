@@ -1,5 +1,5 @@
-<!-- custom reminder -->
-
+<%= simple_form_for @reminder, :url => user_reminders_path(current_user) do |f| %>
+<!-- server-side errors -->
   <% if @reminder.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -15,7 +15,7 @@
     </div>
   <% end %>
     <!-- manual phone number input for now -->
-    <%= f.input :phone_number
+    <%= f.input :phone_number %>
     <%= f.input :title %>
     <%= f.input :time %>
     <%= f.button :submit %>
