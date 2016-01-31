@@ -17,7 +17,10 @@
     <!-- manual phone number input for now -->
     <%= f.input :phone_number %>
     <%= f.input :title %>
-    <%= f.input :time %>
+    <%= time_select :appointment, :time, {:class => "form-control" } %>
+    <%= date_select :appointment, :time, {:class => "form-control" } %>
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
+    <%=f.error_span(:time) %>
     <%= f.button :submit %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
         user_reminders_path(current_user.id), :class => 'btn btn-default' %>
