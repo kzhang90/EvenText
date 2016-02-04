@@ -1,26 +1,4 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-6 col-xs-offset-3">
-      <h2 class="text-center">Search for an event</h2>
-
-
-      <form id="eventbrite-search">
-        <label>Keyword:</label>
-        <input id="keyword-box" type="text" name="keyword"><br>
-        <label>City:</label>
-        <input id="city-box" type="text" name="city"><br>
-        <label>Start Date:</label>
-        <input id="start-box" type="date" name="start"><br>
-        <label>End Date:</label>
-        <input id="end-box" type="date" name="end"><br>
-      </form>
-      <% counter = 0 %>
-
       <script>
-        // this is the button to add a bookmark
-        // not truly functionaly but is almost there. if you can fill in the data JSON object with the proper data the post will work
-        // give it a shot as is and see the POST request be made (check rails s console)
-        // params.require(:bookmark).permit(:title, :image, :description, :location, :date, :time, :url)
         function verifyThat() {
           if($("#keyword-box").val()!="" && $("#city-box").val()!="" && $("#start-box").val() && $("#end-box").val()) {
             return true;
@@ -28,45 +6,74 @@
             return false;
           }
         }
-
+        function renderSearchResultPartial(value) {
+            $("<div>"+value.title+"</div>").appendTo("body");
+            $("<img src=\""+value.image+"\">").appendTo("body");
+            $("<div>"+value.description+"</div>").appendTo("body");
+            $("<div>"+value.date+"</div>").appendTo("body");
+            $("<div>"+value.time+"</div>").appendTo("body");
+            $("<div>"+value.url+"</div>").appendTo("body");
+            // for each search result, we are calling the applyButton function
+            applyButton(value);
+        }
+        // this is the button to add a bookmark
+        // not truly functionaly but is almost there. if you can fill in the data JSON object with the proper data the post will work
+        // give it a shot as is and see the POST request be made (check rails s console)
+        // params.require(:bookmark).permit(:title, :image, :description, :location, :date, :time, :url)
         function applyButton(value) {
           // temporary fix for single quote problem, fix this later
           var newValue = value;
           newValue.description = value.description.replace(/'/g, "");
           // end temporary fix issue
-          var button = `<button onclick='$.ajax({url:  &quot;/users/"+<%= !@current.nil? ? @current_user.id : 1 %>+"/bookmarks&quot;, dataType: &quot;json&quot;, type: &quot;POST&quot;, data: { bookmark: ${JSON.stringify(newValue)} }}); $(this).text(&quot;Bookmark Saved&quot;)'>Save Bookmark!</button>`;
-          $(button).appendTo("body");
-        }
-
-        function renderSearchResultPartial(value) {
-          $("<div>"+value.title+"</div>").appendTo("body");
-          $("<img src=\""+value.image+"\">").appendTo("body");
-          $("<div>"+value.description+"</div>").appendTo("body");
-          $("<div>"+value.date+"</div>").appendTo("body");
-          $("<div>"+value.time+"</div>").appendTo("body");
-          $("<div>"+value.url+"</div>").appendTo("body");
-          applyButton(value);
-        }
+          // save bookmark aka append it to the list of bookmarks for select user
+          // send the bookmark to user bookmarks
+          var button = `<button onclick='$.ajax({
+                                            url:  &quot;/users/"+<%= !@current.nil? ? @current_user.id : 1 %>+"/bookmarks&quot;, 
+                                            dataType: &quot;json&quot;, 
+                                            type: &quot;POST&quot;, 
+                                            data: { 
+                                              bookmark: ${JSON.stringify(newValue)} 
+                                            }
+                                        });
+            // on click, we are going to change this text to "bookmark saved"
+            $(this).text(&quot;Bookmark Saved&quot;)'>Save Bookmark!</button>`;
+        // add this button to the body
+        $(button).appendTo("body");
+        }      
         // ajax requests formated to get data through in a simple manner
       </script>
-        <button id="searchButton" onclick='if(verifyThat()){
-          $.ajax({
-            url:  "/search_apis",
-            dataType: "json",
-            data: {
-               keyword: $("#keyword-box").val(),
-               city: $("#city-box").val(),
-               start_date: $("#start-box").val(),
-               end_date: $("#end-box").val()
-            },
-            success: function(data) {
-              $.each(data, function(index, value) {
-                renderSearchResultPartial(value);
-                <!-- for each of the data in the array that is passed back, append their value individually -->
-              });
-            }
-            });}
-        '>Search!</button>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <h2 class="text-center">Search for an event</h2>
+        <form id="eventbrite-search">
+          <label>Keyword:</label>
+          <input id="keyword-box" type="text" name="keyword"><br>
+          <label>City:</label>
+          <input id="city-box" type="text" name="city"><br>
+          <label>Start Date:</label>
+          <input id="start-box" type="date" name="start"><br>
+          <label>End Date:</label>
+          <input id="end-box" type="date" name="end"><br>
+        </form>
+                            <% counter = 0 %>
+          <button id="searchButton" onclick='if(verifyThat()){
+            $.ajax({
+              url:  "/search_apis",
+              dataType: "json",
+              data: {
+                 keyword: $("#keyword-box").val(),
+                 city: $("#city-box").val(),
+                 start_date: $("#start-box").val(),
+                 end_date: $("#end-box").val()
+              },
+              success: function(data) {
+                $.each(data, function(index, value) {
+                  renderSearchResultPartial(value);
+                });}});}
+          '>Search!</button>
       </div> <!-- should be closing the column -->
 
     </div> <!-- closing the row -->
