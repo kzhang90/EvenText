@@ -1,7 +1,6 @@
 class BookmarksController < ApplicationController
 
   def index
-    binding.pry
     @bookmarks = current_user.bookmarks.order('id DESC')
     @bookmark = Bookmark.new
   end
@@ -25,7 +24,8 @@ class BookmarksController < ApplicationController
   def update
     @bookmark = Bookmark.find(params[:id])
     if @bookmark.update(bookmark_params)
-      redirect_to root_path, flash: {}
+      flash[:success] = "Successfully updated bookmark!"
+      redirect_to user_bookmarks_path(current_user)
     else
       render json: {errors: @bookmark.errors.full_messages}
     end
@@ -40,13 +40,13 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark = Bookmark.find(params[:id])
     if @bookmark.destroy
-      flash[:notice] = "successfully deleted!"
+      flash[:notice] = "Bookmark Deleted!"
+      redirect_to user_bookmarks_path(current_user)
     else
-      render
+      render json: {errors: @bookmark.errors.full_messages} 
     end
-
-    redirect_to user_bookmarks_path(current_user.id)
   end
+
 
   private
 

@@ -6,44 +6,24 @@
             return false;
           }
         }
-
         function renderSearchResultPartial(value) {
-          // if (value.image === 'NULL') {
-          //   value.image = image_path('no-image.jpg');
-          // };
           $("<div class='searchRes'><div class='searchTitle'>"+value.title+"</div><img class='searchImage' src=\""+value.image+"\"></img><div class='searchDes'>"+value.description+"</div><div class='searchDate'>"+value.date+"</div><div class='searchTime'>"+value.time+"</div></div>").appendTo("#api-results");
+          // 
             applyButton(value);
         }
-        // this is the button to add a bookmark
-        // not truly functionaly but is almost there. if you can fill in the data JSON object with the proper data the post will work
-        // give it a shot as is and see the POST request be made (check rails s console)
-        // params.require(:bookmark).permit(:title, :image, :description, :location, :date, :time, :url)
         function applyButton(value) {
-          // temporary fix for single quote problem, fix this later
           var newValue = value;
-          // what to do with a null description
-          if (newValue.description) {
-            value.description.replace(/'/g, "")
-          } else {
-            newValue.description = "no description available"
-          }
-          // end temporary fix issue
-          // save bookmark aka append it to the list of bookmarks for select user
-          // send the bookmark to user bookmarks
           var button = `<button onclick='$.ajax({
-                                            url:  &quot;/users/"+<%= !@current.nil? ? @current_user.id : 1 %>+"/bookmarks&quot;, 
-                                            dataType: &quot;json&quot;, 
-                                            type: &quot;POST&quot;, 
+                                            url: "/users/"+<%= !@current_user.nil? ? @current_user.id : 1 %>+"/bookmarks", 
+                                            dataType: "json", 
+                                            type: "POST", 
                                             data: { 
                                               bookmark: ${JSON.stringify(newValue)} 
                                             }
-                                        });
-            // on click, we are going to change this text to "bookmark saved"
-            $(this).text(&quot;Bookmark Saved&quot;)'>Save Bookmark!</button>`;
-        // this button needs to be in searchRes
+                                          });
+            $(this).text("Bookmark Saved")'>Save Bookmark!</button>`;
         $(button).appendTo("#api-results");
         }      
-        // ajax requests formated to get data through in a simple manner
       </script>
 
 
@@ -77,14 +57,12 @@
                   renderSearchResultPartial(value);
                 });}});}
           '>Search!</button>
-      </div> <!-- should be closing the column -->
+      </div> <!-- closing the column -->
 
     </div> <!-- closing the row -->
   <div class="row" id="bottom-row">
-    <!-- don't need below?  -->
     <div class="col-xs-6 col-xs-offset-3">
       <div id="api-results">
-        <!-- list -->
       </div>
     </div>
   </div>

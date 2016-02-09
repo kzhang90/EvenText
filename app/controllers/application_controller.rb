@@ -22,16 +22,8 @@ class ApplicationController < ActionController::Base
       start_date+'T00:00:00Z&start_date.range_end='+end_date+'T00:00:00Z',
       authorization: ENV['EVENTBRITE']
     )
-    # use line 28 to view response, then comment out and uncomment 29 & 30 for the actual view code
-    # render json: response
     @events = response["events"]
-    # make an array of bookmarks
-    # need to handle empty responses.
-    # function that sets empty string if undefined
-    # some logos are null
-    # @filteredevents = @events.map {
-    #   |event| (defined?(event["logo"]) ? event["logo"]=" ")
-    # }
+
     @bookmarks = @events.map { |event|
       if event["description"]["text"] && event["name"]["text"]
         Bookmark.new(
@@ -44,9 +36,6 @@ class ApplicationController < ActionController::Base
       end
     }
 
-    # @events is an array of objects where the top 10 are displayed
-    # data in js file is @events once it is rednered as :json
-    # render :index
     @st = @bookmarks.map do |f|
       if !f.nil?
         {
