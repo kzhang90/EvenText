@@ -6,14 +6,12 @@
             return false;
           }
         }
+
         function renderSearchResultPartial(value) {
-            $("<div>"+value.title+"</div>").appendTo("body");
-            $("<img src=\""+value.image+"\">").appendTo("body");
-            $("<div>"+value.description+"</div>").appendTo("body");
-            $("<div>"+value.date+"</div>").appendTo("body");
-            $("<div>"+value.time+"</div>").appendTo("body");
-            $("<div>"+value.url+"</div>").appendTo("body");
-            // for each search result, we are calling the applyButton function
+          // if (value.image === 'NULL') {
+          //   value.image = image_path('no-image.jpg');
+          // };
+          $("<div class='searchRes'><div class='searchTitle'>"+value.title+"</div><img class='searchImage' src=\""+value.image+"\"></img><div class='searchDes'>"+value.description+"</div><div class='searchDate'>"+value.date+"</div><div class='searchTime'>"+value.time+"</div></div>").appendTo("#api-results");
             applyButton(value);
         }
         // this is the button to add a bookmark
@@ -23,7 +21,12 @@
         function applyButton(value) {
           // temporary fix for single quote problem, fix this later
           var newValue = value;
-          newValue.description = value.description.replace(/'/g, "");
+          // what to do with a null description
+          if (newValue.description) {
+            value.description.replace(/'/g, "")
+          } else {
+            newValue.description = "no description available"
+          }
           // end temporary fix issue
           // save bookmark aka append it to the list of bookmarks for select user
           // send the bookmark to user bookmarks
@@ -37,8 +40,8 @@
                                         });
             // on click, we are going to change this text to "bookmark saved"
             $(this).text(&quot;Bookmark Saved&quot;)'>Save Bookmark!</button>`;
-        // add this button to the body
-        $(button).appendTo("body");
+        // this button needs to be in searchRes
+        $(button).appendTo("#api-results");
         }      
         // ajax requests formated to get data through in a simple manner
       </script>
