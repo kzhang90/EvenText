@@ -8,9 +8,9 @@
         }
         function renderSearchResultPartial(value) {
           $("<div class='searchRes'><div class='searchTitle'>"+value.title+"</div><img class='searchImage' src=\""+value.image+"\"></img><div class='searchDes'>"+value.description+"</div><div class='searchDate'>"+value.date+"</div><div class='searchTime'>"+value.time+"</div></div>").appendTo("#api-results");
-          // 
             applyButton(value);
         }
+        image_tag("no-image.jpg")
         function applyButton(value) {
           var newValue = value;
           var button = `<button onclick='$.ajax({

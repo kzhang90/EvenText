@@ -6,7 +6,11 @@
                 <% @bookmarks.each do |bookmark| %>
                 <tr class="bookmark-div">
                     <div><%= bookmark.title %></div>
-                    <div><img src="<%= bookmark.image %>"></div>
+                    <% if bookmark.image.empty? %>
+                        <div><%= image_tag("no-image.jpg") %></div>
+                    <% else %>
+                        <div><img src="<%= bookmark.image %>"></div>
+                    <% end %>
                     <div><%= bookmark.description %></div>
                     <div><%= bookmark.location %></div>
                     <div><%= bookmark.time %></div>

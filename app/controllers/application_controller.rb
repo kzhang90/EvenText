@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     "/"
   end
 
+  # def pic_null bookmark
+  #   if bookmark.image.present?
+  #     image_tag
+  # end
+
   def search_apis
     start_date = params[:start_date].to_s
     end_date = params[:end_date].to_s
@@ -28,7 +33,7 @@ class ApplicationController < ActionController::Base
       if event["description"]["text"] && event["name"]["text"]
         Bookmark.new(
           title: event["name"]["text"],
-          image: event["logo"].nil? ? "NULL" : event["logo"]["url"],
+          image: event["logo"].nil? ? "" : event["logo"]["url"],
           description: event["description"]["text"].gsub!("\n"," "),
           date: event["start"]["local"].split("T")[0],
           time: event["start"]["local"].split("T")[1],
