@@ -38,6 +38,7 @@ gem 'rails_12factor', :group => :production
 gem 'puma'
 gem 'figaro'
 ruby '2.0.0'
+gem 'uploadcare-rails', "~> 1.0"
 
 # Use Unicorn as the app server
 # gem 'unicorn'

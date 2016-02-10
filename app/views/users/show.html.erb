@@ -9,7 +9,7 @@
       <div id="profile-picture">
       <img src=<%= @user.profile_picture %>>
       </div>
-      <%= link_to "Edit Profile Info", edit_user_registration_path(current_user) %>
+      <%= link_to "Edit Profile Info", edit_user_registration_path %>
     </div>
     <div class="col-xs-4">
       <h4><%= @user.first_name + " " + @user.last_name %> follows:</h4>
