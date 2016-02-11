@@ -1,4 +1,4 @@
 class Bookmark < ActiveRecord::Base
   belongs_to :user
-  # has_many :comments, dependent: :destroy
+  # add server side validations here?
 end
