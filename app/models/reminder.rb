@@ -6,15 +6,15 @@ class Reminder < ActiveRecord::Base
 
   after_create :send_text_message
 
-  @@SEND_TEXT_MESSAGE_TIME = 60.minutes
+  @@SEND_TEXT_MESSAGE_TIME = 1.minutes
 
   def send_text_message
     @twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
     @twilio_client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
     @twilio_client.account.sms.messages.create(
       :from => @twilio_phone_number,
-      :to => self.phone_number,
-      :body => body,
+      :to => "+19163653454",
+      :body => "hi",
       )
   end
 

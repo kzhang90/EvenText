@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :bookmarks, dependent: :destroy
-  # has_many :comments, dependent: :destroy
   has_many :reminders, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
@@ -18,7 +17,7 @@ class User < ActiveRecord::Base
       name = auth.info.name.split(' ')
       user.first_name = name[0]
       user.last_name = name[1]
-      user.phone_number = 0
+      user.phone_number = auth.phone_number
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
