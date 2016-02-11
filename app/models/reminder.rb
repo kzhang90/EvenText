@@ -33,4 +33,4 @@ class Reminder < ActiveRecord::Base
   handle_asynchronously :send_text_message, :run_at => Proc.new { |i| i.when_to_run }
 end
 
-# heroku config:set TWILIO_ACCOUNT_SID=hkjfdshfkjh3kjrh3kjwhk3h32
+
