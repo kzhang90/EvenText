@@ -83,6 +83,6 @@ class RemindersController < ApplicationController
   private
 
   def reminder_params
-    params.require(:reminder).permit(:title, :time)
+    params.require(:reminder).permit(:title, :time, :time_zone)
   end
 end
