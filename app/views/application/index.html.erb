@@ -10,7 +10,6 @@
           $("<div class='searchRes'><div class='searchTitle'>"+value.title+"</div><img class='searchImage' src=\""+value.image+"\"></img><div class='searchDes'>"+value.description+"</div><div class='searchDate'>"+value.date+"</div><div class='searchTime'>"+value.time+"</div></div>").appendTo("#api-results");
             applyButton(value);
         }
-        image_tag("no-image.jpg")
         function applyButton(value) {
           var newValue = value;
           var button = `<button onclick='$.ajax({
@@ -30,7 +29,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3">
-      <h2 class="text-center">Search for an event</h2>
+      <h2 class="text-center">Search for an Event!</h2>
         <form id="eventbrite-search">
           <label>Keyword:</label>
           <input id="keyword-box" type="text" name="keyword"><br>
@@ -40,23 +39,24 @@
           <input id="start-box" type="date" name="start"><br>
           <label>End Date:</label>
           <input id="end-box" type="date" name="end"><br>
+            
         </form>
-                            <% counter = 0 %>
-          <button id="searchButton" onclick='if(verifyThat()){
-            $.ajax({
-              url:  "/search_apis",
-              dataType: "json",
-              data: {
-                 keyword: $("#keyword-box").val(),
-                 city: $("#city-box").val(),
-                 start_date: $("#start-box").val(),
-                 end_date: $("#end-box").val()
-              },
-              success: function(data) {
-                $.each(data, function(index, value) {
-                  renderSearchResultPartial(value);
-                });}});}
-          '>Search!</button>
+        <button id="searchButton" onclick='if(verifyThat()){
+              $.ajax({
+                url:  "/search_apis",
+                dataType: "json",
+                data: {
+                   keyword: $("#keyword-box").val(),
+                   city: $("#city-box").val(),
+                   start_date: $("#start-box").val(),
+                   end_date: $("#end-box").val()
+                },
+                success: function(data) {
+                  $.each(data, function(index, value) {
+                    renderSearchResultPartial(value);
+                  });}});}
+            '>Search</button>
+          
       </div> <!-- closing the column -->
 
     </div> <!-- closing the row -->

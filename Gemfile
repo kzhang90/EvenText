@@ -39,6 +39,7 @@ gem 'puma'
 gem 'figaro'
 ruby '2.0.0'
 gem 'uploadcare-rails', "~> 1.0"
+gem 'bootstrap-datepicker-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

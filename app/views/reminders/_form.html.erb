@@ -1,5 +1,6 @@
 <%= simple_form_for @reminder, :url => user_reminders_path(current_user) do |f| %>
-<!-- server-side errors -->
+<!-- making a custom reminder? -->
+<!-- server-side errors (.isvalid?)-->
   <% if @reminder.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -15,12 +16,12 @@
     </div>
   <% end %>
     <!-- manual phone number input for now -->
+    <!-- users already have a phone number that they want to user here; validations require a phone number for all users -->
     <%= f.input :phone_number %>
     <%= f.input :title %>
-    <%= time_select :reminder, :time, {:class => "form-control" } %>
-    <%= date_select :reminder, :time, {:class => "form-control" } %>
-    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
-    <%= f.error_span(:time) %>
+    <!-- entering time manually -->
+    <%= f.input time_select :reminder, :time, {:class => "form-control" } %>
+    <%= f.input date_select :reminder, :time, {:class => "form-control" } %>
     <%= f.button :submit %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
         user_reminders_path(current_user.id), :class => 'btn btn-default' %>

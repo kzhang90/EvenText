@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20160202190751) do
     t.datetime "updated_at", null: false
   end
 
+  # what must you have in a reminder? go to model
   create_table "reminders", force: :cascade do |t|
     t.string   "title"
     t.string   "phone_number"

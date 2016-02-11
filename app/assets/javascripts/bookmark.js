@@ -1,6 +1,4 @@
 $(document).ready(
-
-
   function() {
     return $("#new-bookmark").on("ajax:success", function(e, data) {
       return $("h2.text-center").after("<div>"+data+"</div>");

@@ -15,4 +15,5 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require angular/angular
+//= require bootstrap-datepicker
 //= require_tree .

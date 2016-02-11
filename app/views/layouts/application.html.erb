@@ -28,7 +28,7 @@
 </script>
 
 <%= render partial: 'layouts/nav' %>
-
+<!-- this is for flash messages, not validations -->
 <% flash.each do |key, value| %>
   <% if key == "notice" %>
     <%= content_tag :div, value, class: "text-center alert alert-warning" %>
