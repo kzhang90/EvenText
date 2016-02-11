@@ -1,6 +1,5 @@
-<%= simple_form_for @reminder, :url => user_reminders_path(current_user) do |f| %>
-<!-- making a custom reminder? -->
-<!-- server-side errors -->
+<%= form_for @reminder, :url => user_reminders_path(current_user) do |f| %>
+
   <% if @reminder.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -15,15 +14,26 @@
       </div>
     </div>
   <% end %>
-    <!-- manual phone number input for now -->
-    <%= f.input :phone_number %>
-    <%= f.input :title %>
-    <!-- entering time manually -->
-    <%= time_select :reminder, :time, {:class => "form-control" } %>
-    <%= date_select :reminder, :time, {:class => "form-control" } %>
-    <div class="buttons">
-    <%= f.button :submit %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-        user_reminders_path(current_user.id), :class => 'btn btn-default' %>
-        </div>
+
+
+    <!-- current_user.phone_number will work IAOI current_user.phone_number is updatable in edit registration -->
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone_number %>
+      <%= f.text_field :phone_number, input_html: { value: current_user.phone_number } %>
+    </div>
+    <div class="form-group">
+      <%= f.label :time, "Time and Date", :class => "control-label col-lg-2" %>
+      <!-- Rails expects time_select when dealing with ActiveRecord forms -->
+        <%= time_select :reminder, :time %>
+        <%= date_select :reminder, :time %>
+    </div>
+    <div class="form-group">
+      <%= f.submit nil, :class => "btn btn-primary" %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+          user_reminders_path(current_user.id), :class => 'btn btn-default' %>
+    </div>
 <% end %>
