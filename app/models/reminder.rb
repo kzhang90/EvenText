@@ -10,7 +10,7 @@ class Reminder < ActiveRecord::Base
   @@SEND_TEXT_MESSAGE_TIME = 5.minutes
 
   # can I access current user in here now?
-  # need to be able to update my phone number for this to work...
+  # need to be able to update phone number for this to work
   # instance method below
   def send_text_message
     # @ means THIS OBJECT's twilio phone number etc
