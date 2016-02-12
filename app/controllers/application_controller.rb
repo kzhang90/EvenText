@@ -31,8 +31,7 @@ class ApplicationController < ActionController::Base
           title: event["name"]["text"],
           image: event["logo"].nil? ? "" : event["logo"]["url"],
           description: event["description"]["text"].gsub!("\n"," "),
-          date: event["start"]["local"].split("T")[0],
-          time: event["start"]["local"].split("T")[1],
+          time: event["start"]["local"].split("T")[0] + " " + event["start"]["local"].split("T")[1],
           url: event["url"])
       end
     }
@@ -44,7 +43,6 @@ class ApplicationController < ActionController::Base
           "image" => f.image,
           "description" => f.description,
           "location" => params[:city],
-          "date" => f.date,
           "time" => f.time,
           "url" => f.url
         }
