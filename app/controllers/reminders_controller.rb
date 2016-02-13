@@ -14,9 +14,10 @@ class RemindersController < ApplicationController
   end
 
   def create
-    Time.zone = reminder_params[:time_zone]
+    # Time.zone = reminder_params[:time_zone]
     @reminder = current_user.reminders.build reminder_params 
     @current_user = current_user
+    @reminders = current_user.reminders
     # now, the new instance of reminder will know of current user.
     # I think you can now access the current user in the the instance methods of reminder model
 
@@ -29,7 +30,7 @@ class RemindersController < ApplicationController
       else
         flash.now[:notice] = 'Reminder could not be created. Please try again.'
         format.html {
-          render :new
+          render :index 
         }
         format.json {
           render json: @reminder.errors.full_messages
@@ -49,12 +50,11 @@ class RemindersController < ApplicationController
   def update
    @reminder = Reminder.find(params[:id])
    @reminder.user_id = current_user.id
-
     respond_to do |format|
       if @reminder.update_attributes(reminder_params)
         flash[:success] = 'Reminder has been successfully updated.'
         format.html {
-          redirect_to user_reminders_path(current_user.id)
+          redirect_to user_reminders_path(current_user)
         }
         format.json {
           render json: @reminder
@@ -62,7 +62,7 @@ class RemindersController < ApplicationController
       else
         flash[:error] = 'Reminder could not be updated.'
         format.html {
-          redirect_to edit_bookmarks_path
+          redirect_to edit_reminder_path
         }
         format.json {
           render json: @reminder.errors.full_messages
@@ -83,6 +83,6 @@ class RemindersController < ApplicationController
   private
 
   def reminder_params
-    params.require(:reminder).permit(:title, :time, :time_zone)
+    params.require(:reminder).permit(:title, :time, :phone_number, :time_zone)
   end
 end
