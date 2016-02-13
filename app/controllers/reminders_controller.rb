@@ -10,14 +10,13 @@ class RemindersController < ApplicationController
 
   def new
     @user = User.find_by_id params[:user_id]
-    @reminder = @user.reminders.build
+    @reminder = @user.reminders.new
   end
 
   def create
     # Time.zone = reminder_params[:time_zone]
-    @reminder = current_user.reminders.build reminder_params 
-    @current_user = current_user
-    @reminders = current_user.reminders
+    @user = current_user
+    @reminder = @user.reminders.build reminder_params
     # now, the new instance of reminder will know of current user.
     # I think you can now access the current user in the the instance methods of reminder model
 
@@ -30,7 +29,7 @@ class RemindersController < ApplicationController
       else
         flash.now[:notice] = 'Reminder could not be created. Please try again.'
         format.html {
-          render :index 
+          render :new 
         }
         format.json {
           render json: @reminder.errors.full_messages
@@ -83,6 +82,6 @@ class RemindersController < ApplicationController
   private
 
   def reminder_params
-    params.require(:reminder).permit(:title, :time, :phone_number, :time_zone)
+    params.require(:reminder).permit(:title, :time, :phone_number)
   end
 end

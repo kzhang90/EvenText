@@ -17,13 +17,12 @@ class User < ActiveRecord::Base
       name = auth.info.name.split(' ')
       user.first_name = name[0]
       user.last_name = name[1]
-      user.phone_number = auth.phone_number
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
     end
   end
-  validates_presence_of :first_name, :last_name, :email, :phone_number
+  validates_presence_of :first_name, :last_name, :email
 
 end
