@@ -24,13 +24,12 @@ class ApplicationController < ActionController::Base
       authorization: ENV['EVENTBRITE']
     )
     @events = response["events"]
-
     @bookmarks = @events.map { |event|
       if event["description"]["text"] && event["name"]["text"]
         Bookmark.new(
           title: event["name"]["text"],
           image: event["logo"].nil? ? "" : event["logo"]["url"],
-          description: event["description"]["text"].gsub!("\n"," "),
+          description: event["description"]["text"].match(/^.*?[\.!\?](\s|$)/).to_s.gsub("\n"," "),
           time: event["start"]["local"].split("T")[0] + " " + event["start"]["local"].split("T")[1],
           url: event["url"])
       end
