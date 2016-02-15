@@ -26,8 +26,8 @@ body {
 
 .searchRes, .bookmarkDiv{
   border: 1px solid black;
-  margin: 20px;
-  padding: 40px;
+  margin: 4px;
+  padding: 8px;
 }
 
 .searchTitle, .bookmark.title {
@@ -50,5 +50,12 @@ body {
 .searchTime {
 
 }
+
+.image img {
+  max-width: 150px;
+  max-height: 150px;
+  float: left;
+}
+
 
 

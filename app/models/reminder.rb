@@ -10,11 +10,7 @@ class Reminder < ActiveRecord::Base
 
   @@SEND_TEXT_MESSAGE_TIME = 5.minutes
 
-  # can I access current user in here now?
-  # need to be able to update phone number for this to work
-  # instance method below
   def send_text_message
-    # @ means THIS OBJECT's twilio phone number etc
     @twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
     @twilio_client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
     # %k: 24hr time, %M: minute, %p: AM/PM, %b: e.g. "Jan", %d: zero padded day of the month e.g. "01"
