@@ -15,11 +15,12 @@ class Reminder < ActiveRecord::Base
     numba = "+1"+self.phone_number
     time_str = ((self.time).localtime).strftime("%k:%M%p on %b. %d")
     body = "Hi. Just a reminder that #{self.title} is coming up at #{time_str}."
-    @message = @twilio_client.account.sms.messages.create(
+    message = @twilio_client.account.sms.messages.create(
       :from => @twilio_phone_number,
       :to => numba,
       :body => body,
       )
+    puts message
   end
 # make everything time
   def when_to_run
