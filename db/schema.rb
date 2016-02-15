@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20160211232213) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.text     "url"
+    # change time to t.time
+    # add t.date "date"
     t.datetime "time"
   end
 
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(version: 20160211232213) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    # change to t.time "time"
     t.datetime "time"
   end
 

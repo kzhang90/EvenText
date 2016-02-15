@@ -1,7 +1,5 @@
 class Reminder < ActiveRecord::Base
   validates :title, presence: true
-  # below necessary? if can access current user phone number
-  # validate phone number length is ten
   validates :phone_number, presence: true
   validates :time, presence: true
   belongs_to :user
@@ -16,15 +14,16 @@ class Reminder < ActiveRecord::Base
     # %k: 24hr time, %M: minute, %p: AM/PM, %b: e.g. "Jan", %d: zero padded day of the month e.g. "01"
     numba = "+1"+self.phone_number
     time_str = ((self.time).localtime).strftime("%k:%M%p on %b. %d")
-    body = "Hi #{current_user.first_name}. Just a reminder that #{self.title} is coming up at #{time_str}."
-    @twilio_client.account.sms.messages.create(
+    body = "Hi. Just a reminder that #{self.title} is coming up at #{time_str}."
+    @message = @twilio_client.account.sms.messages.create(
       :from => @twilio_phone_number,
       :to => numba,
       :body => body,
       )
   end
-
+# make everything time
   def when_to_run
+    # parse 2016-02-14 17:30:00 UTC - int seconds
     time - @@SEND_TEXT_MESSAGE_TIME
   end
 
