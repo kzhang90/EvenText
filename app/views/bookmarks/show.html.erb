@@ -9,7 +9,7 @@
         <%= f.input :title, input_html: { value: @bookmark["title"] } %>
         <%= f.input :time, input_html: { value: @bookmark["time"] } %>
         <!-- need time/date select and timezone here -->
-        <%= f.input :phone_number, input_html: { value: current_user.phone_number || 'Please enter your phone number' } %>
+        <%= f.input :phone_number, :placeholder => 'Please enter your phone number' %>
         <%= f.button :submit %>
       <% end %>
     </div>
