@@ -61,7 +61,8 @@ body {
 
 
 .searchRes, .bookmarkDiv{
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 2%;
   margin: 4px;
   padding: 8px;
 }
@@ -87,9 +88,25 @@ body {
 
 }
 
-.image img {
-  max-width: 150px;
-  max-height: 150px;
+.bookmarkDiv {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bookmark.specifics {
+  float: right;
+  width: 75%;
+  text-align: center;
+}
+
+#bookmark-links {
+  display: inline;
+}
+
+.bookmarkDiv img {
+  width: 25%;
+  height: 100%;
   float: left;
 }
 

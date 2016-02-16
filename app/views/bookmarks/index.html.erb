@@ -4,21 +4,21 @@
             <h2 class="text-center"><%= current_user.first_name %>'s Bookmarks</h2>
                 <% @bookmarks.each do |bookmark| %>
                 <div class="bookmarkDiv">
-                    <div class="bookmark title"><%= bookmark.title %></div>
                     <% if bookmark.image.empty? %>
-                        <div class="bookmark image"><%= image_tag("no-image.jpg") %></div>
+                        <%= image_tag("no-image.jpg") %>
                     <% else %>
-                        <div class="bookmark image"><img src="<%= bookmark.image %>"></div>
+                        <img src="<%= bookmark.image %>">
                     <% end %>
                     <div class="bookmark specifics">
+                        <div class="bookmark title"><%= bookmark.title %></div>
                         <div class="bookmark description"><%= (bookmark.description).match(/^.*?[\.!\?](?:|$)/).to_s %></div>
                         <div class="bookmark location"><%= bookmark.location %></div>
                         <div class="bookmark time"><%= bookmark.time.to_s.gsub(/\s+/m, ' ').strip.split(" ")[0] %></div>
                         <div class="bookmark date"><%= bookmark.time.to_s.gsub(/\s+/m, ' ').strip.split(" ")[1] %></div>
-                        <div class="bookmark url"><%= bookmark.url %></div>
-                        <div class="bookmark edit"><%= link_to "Edit", [:edit, bookmark]%></div>
-                        <div class="bookmark delete"><%= link_to "Delete", bookmark, method: :delete, data: { confirm: 'Are you sure you want to delete this alert?' }%></div>
-                        <div class="bookmark reminder"><%= link_to "Add bookmark to reminders?", bookmark_path(bookmark.id) %></div>
+                        <div class="bookmark url"><%= link_to "Event Page", bookmark.url %></div>
+                        <span id="bookmark-links"><%= link_to "Edit", [:edit, bookmark], class: " btn bookmark edit" %>
+                        <%= link_to "Delete", bookmark, :method=>"delete", data: { confirm: 'Are you sure you want to delete this alert?' }, class: "btn bookmark delete" %>
+                        <%= link_to "Add bookmark to reminders?", bookmark_path(bookmark.id), class: "btn bookmark reminder" %></span>
                     </div>
                 </div>
                 <% end %>
