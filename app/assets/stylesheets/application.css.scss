@@ -20,6 +20,17 @@
   font-family: 'Nunito', sans-serif;
 }
 
+h4 {
+  margin-top: 20px;
+}
+
+hr.style-one {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
 #signup-title {
   color: #0080FF;
   font-size: 35px;
@@ -81,6 +92,19 @@ body {
   max-height: 150px;
   float: left;
 }
+
+#profile-column img {
+  display: block;
+  margin: 0 auto;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#followers, #profile-column {
+  text-align: center;
+}
+
+
 
 
 

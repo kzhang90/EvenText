@@ -1,17 +1,26 @@
 <div class="container-fluid">
   <div class="row">
-    <h2 class="text-center"><%= @user.first_name + " " + @user.last_name %>'s Profile</h2>
-  </div>
-  <div class="row">
-    <div class="col-xs-6">
-      <!-- profile picture -->
+
+
+    <div id="profile-column" class="col-xs-6">
+      <h2 class="text-center"><%= @user.first_name + " " + @user.last_name %></h2>
+
       <div id="profile-picture">
         <%= image_tag @user.avatar.url(:medium) %>
       </div>
-      <%= link_to "Edit Profile Info", edit_user_registration_path, class: "btn btn-default" %>
+      
+      <div>
+        <%= link_to "Edit Profile Info", edit_user_registration_path, class: "btn btn-default" %>
+      </div>
     </div>
-    <div class="col-xs-4">
-      <h4><%= @user.first_name + " " + @user.last_name %> follows:</h4>
+
+
+
+
+    <div id="followers" class="col-xs-3">
+      <% if current_user == @user %>
+      <h4>Users I Follow</h4>
+      <hr class="style-one">
         <ul>
         <% for friendship in @user.friendships %>
           <li>
@@ -20,9 +29,15 @@
           </li>
         <% end %>
         </ul>
-  
+        <% end %>
+        
+          <%= link_to "Find friends to follow!", users_path, class: "btn btn-default" %>
 
+    </div>
+
+    <div class="col-xs-3">
       <h4 class="text-center">Followers</h4>
+      <hr class="style-one">
         <ul>
         <% for user in @user.inverse_friends %>
           <li><%= user.first_name + " " + user.last_name%></li>
@@ -31,10 +46,6 @@
         </ul>
     </div>
 
-
-    <div class="col-xs-2">
-      <p><%= link_to "Find friends to follow!", users_path, class: "btn btn-default" %></p>
-    </div>
   </div>
 </div>
 
