@@ -3,12 +3,12 @@
     <h2 class="text-center"><%= @user.first_name + " " + @user.last_name %>'s Profile</h2>
   </div>
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-6">
       <!-- profile picture -->
       <div id="profile-picture">
         <%= image_tag @user.avatar.url(:medium) %>
       </div>
-      <%= link_to "Edit Profile Info", edit_user_registration_path %>
+      <%= link_to "Edit Profile Info", edit_user_registration_path, class: "btn btn-default" %>
     </div>
     <div class="col-xs-4">
       <h4><%= @user.first_name + " " + @user.last_name %> follows:</h4>
@@ -22,27 +22,19 @@
         </ul>
   
 
-      <h4>Followers</h4>
+      <h4 class="text-center">Followers</h4>
         <ul>
         <% for user in @user.inverse_friends %>
           <li><%= user.first_name + " " + user.last_name%></li>
-<!--           <li><%= link_to "User's profile", user_path(user) %></li>
- -->        <% end %>
+          <li><%= link_to "User's profile", user_path(user) %></li>
+       <% end %>
         </ul>
     </div>
 
 
-    <div class="col-xs-4">
-      <p><%= link_to "Find friends to follow!", users_path %></p>
+    <div class="col-xs-2">
+      <p><%= link_to "Find friends to follow!", users_path, class: "btn btn-default" %></p>
     </div>
   </div>
-  
-  
-
-
-  
-
-  
-
 </div>
 
