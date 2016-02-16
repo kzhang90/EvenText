@@ -1,32 +1,41 @@
 <div class="container-fluid">
-<h2 class="text-center">Sign up</h2>
+  
 
-<div class="row">
-  <div class="col-xs-6 col-xs-offset-3">
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <div class="row">
 
-  <div class="form-inputs">
-    <%= f.input :first_name, required: true, autofocus: true %>
-    <%= f.input :last_name, required: true, autofocus: true %>
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :avatar, as: :file %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
+
+    <div class="col-xs-8">
+      <p id="signup-title">Welcome to EVENText!</p>
+      <br>
+      <p id="signup-description">A place to search for events and be reminded later.</p>
+    </div>
+
+
+    <div class="col-xs-4">
+
+      <h3 class="text-center">Sign-Up</h3>
+      <div id="signup-form">
+        
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <%= f.input :first_name, required: true, autofocus: true %>
+          <%= f.input :last_name, required: true, autofocus: true %>
+          <%= f.input :email, required: true, autofocus: true %>
+          <%= f.input :password, required: true %>
+          <%= f.input :password_confirmation, required: true %>
+          <%= f.button :submit, "Sign up", class: "btn btn-default" %></br>
+        <% end %>
+        
+      </div>
+      <span>Already have an account?</span></br>
+        <%= render "devise/shared/links"%>
+
+
+    </div>
+    <!-- col-xs-4 -->
+
   </div>
+  <!-- row -->
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up", class: "pull-right btn btn-default" %></br>
-    <hr>
-    <%= render "devise/shared/links"%>
-  </div>
-<% end %>
-
-
-  </div>
 </div>
-
-
-
-<!-- form takes in search parameters, hit action in controller, make api call using params from search (params) with results of api call make an instance variable @ and then render a view -->
-</div>
+<!-- container -->

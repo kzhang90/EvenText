@@ -14,6 +14,30 @@
 // all styles go in here
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+
+*{
+  font-family: 'Nunito', sans-serif;
+}
+
+#signup-title {
+  color: #0080FF;
+  font-size: 35px;
+  margin-top: 20px;
+}
+
+#signup-description {
+  color: #0080FF;
+  font-size: 25px;
+}
+
+#signup-form {
+  border: 5px solid black;
+  border-radius: 5%;
+  background: #eee;
+  padding: 10px;
+  margin: 5px;
+}
 
 #eventbrite-search input {
   width: 100%;
