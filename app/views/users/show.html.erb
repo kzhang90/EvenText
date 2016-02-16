@@ -1,4 +1,3 @@
-<!-- "my" or current user? -->
 <div class="container-fluid">
   <div class="row">
     <h2 class="text-center"><%= @user.first_name + " " + @user.last_name %>'s Profile</h2>
@@ -7,8 +6,7 @@
     <div class="col-xs-4">
       <!-- profile picture -->
       <div id="profile-picture">
-      <%= @user.inspect %>
-      <img src=<%= @user.profile_picture %>>
+        <%= image_tag @user.avatar.url(:medium) %>
       </div>
       <%= link_to "Edit Profile Info", edit_user_registration_path %>
     </div>

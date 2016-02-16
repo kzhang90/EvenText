@@ -3,14 +3,14 @@
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3">
     <%= current_user.inspect %>
-      <h2>Add Your bookmark as a reminder</h2>
+      <h2 class="text-center">Add Your bookmark as a reminder</h2>
 
       <%= simple_form_for @reminder, :url => user_reminders_path(current_user), :method => :post do |f| %>
-        <%= f.input :title, input_html: { value: @bookmark["title"] } %>
-        <%= f.input :time, input_html: { value: @bookmark["time"] } %>
-        <!-- need time/date select and timezone here -->
-        <%= f.input :phone_number, :placeholder => 'Please enter your phone number' %>
-        <%= f.button :submit %>
+        <%= f.input :title, class: "form-control",input_html: { value: @bookmark["title"] } %>
+        <%= f.input :time, class: "form-control",input_html: { value: @bookmark["time"] } %>
+        <%= f.input :phone_number, class: "form-control", :placeholder => 'Please enter your phone number' %>
+        <%= f.submit class: "btn btn-primary"%>
+        <%= link_to 'Cancel', user_bookmarks_path(current_user), class: "btn btn-danger" %>
       <% end %>
     </div>
   </div>
