@@ -6,7 +6,7 @@ class Reminder < ActiveRecord::Base
 
   after_create :send_text_message
 
-  # @@SEND_TEXT_MESSAGE_TIME = 1.minutes
+  # @@SEND_TEXT_MESSAGE_TIME = 2.minutes
 
   def send_text_message
     @twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']

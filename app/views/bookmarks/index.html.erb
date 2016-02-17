@@ -13,7 +13,7 @@
                         <div class="bookmark title"><%= bookmark.title %></div>
                         <div class="bookmark description"><%= (bookmark.description).match(/^.*?[\.!\?](?:|$)/).to_s %></div>
                         <div class="bookmark location"><%= bookmark.location %></div>
-                        <div class="bookmark time"><%= bookmark.time.to_s.gsub(/\s+/m, ' ').strip.split(" ")[0] %></div>
+                        <div class="bookmark time"><%= bookmark.time.to_s.gsub(/\s+/m, ' ').strip.split(" ")[0][0..4] %></div>
                         <div class="bookmark date"><%= bookmark.time.to_s.gsub(/\s+/m, ' ').strip.split(" ")[1] %></div>
                         <div class="bookmark url"><%= link_to "Event Page", bookmark.url %></div>
                         <span id="bookmark-links"><%= link_to "Edit", [:edit, bookmark], class: " btn bookmark edit" %>

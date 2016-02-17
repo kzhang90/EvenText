@@ -14,7 +14,7 @@ class RemindersController < ApplicationController
   end
 
   def create
-    # Time.zone = reminder_params[:time_zone]
+    # Time.zone = reminder_params[:time]
     @user = current_user
     @reminder = @user.reminders.build reminder_params
 

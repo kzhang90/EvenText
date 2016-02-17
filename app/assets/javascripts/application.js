@@ -17,3 +17,8 @@
 //= require angular/angular
 //= require bootstrap-datepicker
 //= require_tree .
+
+$(document).ready(
+  //when event list comes out, toggle hide the search form
+  //'show button' that toggles it again
+  );

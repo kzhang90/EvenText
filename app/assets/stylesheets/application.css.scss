@@ -59,7 +59,6 @@ body {
   background-image: url(image_path('concrete_seamless.png'))
 }
 
-
 .searchRes, .bookmarkDiv{
   border: 2px solid black;
   border-radius: 2%;
@@ -121,6 +120,9 @@ body {
   text-align: center;
 }
 
+.no-bullets {
+  list-style-type: none;
+}
 
 
 

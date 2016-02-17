@@ -18,6 +18,7 @@
   <%= f.input :description, class:'form-control' %>
   <%= f.input :location, class: 'form-control' %>
   <%= f.input :time, class: "form-control" %>
+  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
   <%= f.input :url, class:'form-control', placeholder:"Enter a url" %>
   <%= f.submit  class: "btn btn-primary"%>
   <%= link_to 'Cancel', user_bookmarks_path(current_user), class: "btn btn-danger" %>
