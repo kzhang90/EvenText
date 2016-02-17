@@ -6,7 +6,7 @@ class Reminder < ActiveRecord::Base
 
   after_create :send_text_message
 
-  @@SEND_TEXT_MESSAGE_TIME = 5.minutes
+  # @@SEND_TEXT_MESSAGE_TIME = 1.minutes
 
   def send_text_message
     @twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
@@ -15,19 +15,18 @@ class Reminder < ActiveRecord::Base
     numba = "+1"+self.phone_number
     time_str = ((self.time).localtime).strftime("%k:%M%p on %b. %d")
     body = "Hi. Just a reminder that #{self.title} is coming up at #{time_str}."
-    message = @twilio_client.account.sms.messages.create(
+    message = @twilio_client.account.messages.create(
       :from => @twilio_phone_number,
       :to => numba,
       :body => body,
-      )
-    puts message
+    )
   end
 
-  def when_to_run
-    time - @@SEND_TEXT_MESSAGE_TIME
-  end
+  # def when_to_run
+  #   time - @@SEND_TEXT_MESSAGE_TIME
+  # end
 
-  handle_asynchronously :send_text_message, :run_at => Proc.new { |i| i.when_to_run }
+  # handle_asynchronously :send_text_message, :run_at => Proc.new { |i| i.when_to_run }
 end
 
 
