@@ -22,9 +22,8 @@ class Reminder < ActiveRecord::Base
       )
     puts message
   end
-# make everything time
+
   def when_to_run
-    # parse 2016-02-14 17:30:00 UTC - int seconds
     time - @@SEND_TEXT_MESSAGE_TIME
   end
 

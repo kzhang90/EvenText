@@ -17,8 +17,6 @@ class RemindersController < ApplicationController
     # Time.zone = reminder_params[:time_zone]
     @user = current_user
     @reminder = @user.reminders.build reminder_params
-    # now, the new instance of reminder will know of current user.
-    # I think you can now access the current user in the the instance methods of reminder model
 
     respond_to do |format|
       if @reminder.save
