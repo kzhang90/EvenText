@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
 
   def index
+    @user = current_user
+    @bookmarks = @user.bookmarks
   end
 
   def after_sign_in_path_for(resource)

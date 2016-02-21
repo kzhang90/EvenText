@@ -17,7 +17,6 @@
 //= require angular/angular
 //= require bootstrap-datepicker
 //= require_tree .
-
 function verifyThat() {
           if($("#keyword-box").val()!="" && 
             $("#city-box").val()!="" && 
@@ -29,30 +28,16 @@ function verifyThat() {
           }
 }
 function renderSearchResultPartial(value) {
-
-  $("<div id='divCheckbox' data-value="+JSON.stringify(value)+"></div><div class='searchRes'><div class='searchTitle'>"+
+// if any value.title match @bookmarks 
+  $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><div class='searchTitle'>"+
     value.title+"</div><img class='searchImage' src=\""+
     value.image+"\"></img><div class='searchDes'>"+
     value.description+"</div><div class='searchTime'>"+
     value.time+
-    "</div><button type='submit' class='saveBookmark'>Save Bookmark</button></div>").appendTo("#api-results");
+    "</div><button type='submit' class='saveBookmark btn btn-default'>Save Bookmark</button></div>").appendTo("#api-results");
 
 
 }
-// function applyButton(value) {
-//           var newValue = value;
-//           var button = `<button onclick='$.ajax({
-//                                             url: "/users/"+<%= !@current_user.nil? ? @current_user.id : 1 %>+"/bookmarks", 
-//                                             dataType: "json", 
-//                                             type: "POST", 
-//                                             data: { 
-//                                               bookmark: ${JSON.stringify(newValue)} 
-//                                             }
-//                                           });
-//             $(this).text("Bookmark Saved")'>Save Bookmark!</button>`;
-//         $(button).appendTo("#api-results");
-// }
-
 $(document).ready(function() {
     $("#searchButton").click(function(event) {
         event.preventDefault();
@@ -76,22 +61,19 @@ $(document).ready(function() {
             });
         }
     });
-    $('body').on('click', '.saveBookmark', function() {
-        alert("omg!");
-        $(this).text("Bookmark Saved");
+    // if var id 
+    $('body').on('click', '.searchRes', function() {
         var id = $('#eventbrite-search').data('user_id');
         var fullurl = "/users/"+ id +"/bookmarks";
-        var bookmarkval = $('#divCheckbox').data('value');
-        console.log(bookmarkval);
+        var data = JSON.parse(decodeURIComponent($(this).children("div").attr("data-json")));
         $.ajax({
             url: fullurl,
             dataType: "json",
             type: "POST",
             data: {
-                bookmark: bookmarkval
+                bookmark: data
             }
         });
-        $(this).text("Bookmark Saved");
+        $(this).children("button").text("Bookmark Saved");
     });
-    console.log("bottom");
 });
