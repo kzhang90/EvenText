@@ -1,31 +1,3 @@
-      <script>
-        function verifyThat() {
-          if($("#keyword-box").val()!="" && $("#city-box").val()!="" && $("#start-box").val() && $("#end-box").val()) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-        function renderSearchResultPartial(value) {
-          $("<div class='searchRes'><div class='searchTitle'>"+value.title+"</div><img class='searchImage' src=\""+value.image+"\"></img><div class='searchDes'>"+value.description+"</div><div class='searchTime'>"+value.time+"</div></div>").appendTo("#api-results");
-            applyButton(value);
-        }
-        function applyButton(value) {
-          var newValue = value;
-          var button = `<button onclick='$.ajax({
-                                            url: "/users/"+<%= !@current_user.nil? ? @current_user.id : 1 %>+"/bookmarks", 
-                                            dataType: "json", 
-                                            type: "POST", 
-                                            data: { 
-                                              bookmark: ${JSON.stringify(newValue)} 
-                                            }
-                                          });
-            $(this).text("Bookmark Saved")'>Save Bookmark!</button>`;
-        $(button).appendTo("#api-results");
-        }      
-      </script>
-
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3">
@@ -47,25 +19,9 @@
             <label for="end-box" class="sr-only">End Date</label>
             <input id="end-box" type="text" onfocus="(this.type='date')" name="end" class="form-control" placeholder="End Date">
           </div>
-           
+          <button type="submit" id="searchButton" class="btn btn-primary">Search!</button>
         </form>
-        <button class="btn btn-primary"id="searchButton" onclick='if(verifyThat()){
-              $.ajax({
-                url:  "/search_apis",
-                dataType: "json",
-                data: {
-                   keyword: $("#keyword-box").val(),
-                   city: $("#city-box").val(),
-                   start_date: $("#start-box").val(),
-                   end_date: $("#end-box").val()
-                },
-                success: function(data) {
-                  $.each(data, function(index, value) {
-                    renderSearchResultPartial(value);
-                  });}});}
-            '>Search!</button>
-        
-          
+            
       </div>
 
     </div>

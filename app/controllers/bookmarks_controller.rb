@@ -3,7 +3,6 @@ class BookmarksController < ApplicationController
   def index
     @bookmarks = current_user.bookmarks.order('id DESC')
     @bookmark = Bookmark.new
-    # binding.pry
   end
 
   def create
