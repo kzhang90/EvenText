@@ -29,14 +29,15 @@ function verifyThat() {
           }
 }
 function renderSearchResultPartial(value) {
-  $("<div class='searchRes'><div class='searchTitle'>"+
+
+  $("<div id='divCheckbox' data-value="+JSON.stringify(value)+"></div><div class='searchRes'><div class='searchTitle'>"+
     value.title+"</div><img class='searchImage' src=\""+
     value.image+"\"></img><div class='searchDes'>"+
     value.description+"</div><div class='searchTime'>"+
     value.time+
     "</div><button type='submit' class='saveBookmark'>Save Bookmark</button></div>").appendTo("#api-results");
-  
-  // applyButton(value);
+
+
 }
 // function applyButton(value) {
 //           var newValue = value;
@@ -54,37 +55,43 @@ function renderSearchResultPartial(value) {
 
 $(document).ready(function() {
     $("#searchButton").click(function(event) {
-      event.preventDefault();
-      if (verifyThat()) {
-        $.ajax({
-          url:  "/search_apis",
-          dataType: "json",
-          data: {
-             keyword: $("#keyword-box").val(),
-             city: $("#city-box").val(),
-             start_date: $("#start-box").val(),
-             end_date: $("#end-box").val()
-            },
-          success: function(data) {
-            $.each(data, function(index, value) {
-              renderSearchResultPartial(value);
+        event.preventDefault();
+        if (verifyThat()) {
+            $.ajax({
+                url: "/search_apis",
+                dataType: "json",
+                data: {
+                    keyword: $("#keyword-box").val(),
+                    city: $("#city-box").val(),
+                    start_date: $("#start-box").val(),
+                    end_date: $("#end-box").val()
+                },
+                success: function(data) {
+                    $.each(data, function(index,
+                        value) {
+                        renderSearchResultPartial
+                            (value);
+                    });
+                }
             });
-          }});
-      }
+        }
     });
-    console.log("hello");
-    $(".saveBookmark").click(function() {
-      console.log("clicked!");
-      $.ajax({
-          url: "/users/"+current_user+"/bookmarks", 
-          dataType: "json", 
-          type: "POST", 
-          data: { 
-            bookmark: JSON.stringify(value)
+    $('body').on('click', '.saveBookmark', function() {
+        alert("omg!");
+        $(this).text("Bookmark Saved");
+        var id = $('#eventbrite-search').data('user_id');
+        var fullurl = "/users/"+ id +"/bookmarks";
+        var bookmarkval = $('#divCheckbox').data('value');
+        console.log(bookmarkval);
+        $.ajax({
+            url: fullurl,
+            dataType: "json",
+            type: "POST",
+            data: {
+                bookmark: bookmarkval
             }
         });
-      $(this).text("Bookmark Saved");
+        $(this).text("Bookmark Saved");
     });
-      console.log("bottom");
-  }
-);
+    console.log("bottom");
+});
