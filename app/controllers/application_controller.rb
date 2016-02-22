@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_filter :authenticate_user!
+  around_filter :user_time_zone, :if => :current_user
 
   def index
     @user = current_user
@@ -61,4 +62,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password)}
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :avatar, :password, :password_confirmation) }
   end
+
+  def user_time_zone(&block)
+    Time.use_zone(current_user.time_zone, &block)
+  end
+
 end

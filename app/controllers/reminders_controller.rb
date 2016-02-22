@@ -14,10 +14,8 @@ class RemindersController < ApplicationController
   end
 
   def create
-    # Time.zone = reminder_params[:time]
     @user = current_user
     @reminder = @user.reminders.build reminder_params
-
     respond_to do |format|
       if @reminder.save
         flash[:success] = 'Reminder was created successfully!'
