@@ -18,10 +18,19 @@
 
 *{
   font-family: 'Nunito', sans-serif;
+  box-sizing: border-box;
 }
-#divCheckbox {
-  display: none;
+*, *:before, *:after {
+  box-sizing: inherit;
 }
+
+body {
+  background-image: url(image_path('concrete_seamless.png'))
+}
+.jsondata {
+  visibility: hidden;
+}
+
 h4 {
   margin-top: 20px;
 }
@@ -57,38 +66,62 @@ hr.style-one {
   clear: both;
 }
 
-body {
-  background-image: url(image_path('concrete_seamless.png'))
+#api-results {
+  overflow: hidden;
 }
 
-.searchRes, .bookmarkDiv{
+.searchRes {
   border: 2px solid black;
-  margin: 4px;
-  padding: 8px;
+  background: #EBAB46;
+  display: inline-block;
+  width: 43%;
+  height: 250px;
+  float: left;
+  padding: 5px;
+  margin: 7px;
+  overflow: hidden;
 }
 
-.searchTitle, .bookmark.title {
+.content-padding {
+    padding: 10px;
+    overflow: hidden ; /* minds inside and outside floatting elements, fine if no size given */
+}
+
+.searchTitle {
+  text-align: center;
+  font-weight: bold;
+  float: right;
+}
+
+.searchImage img {
+  float: left;
+  clear: left;
+  height: 75px;
+}
+
+.searchDes {
+  float: right;
+  height: 50px;
+}
+
+.searchTime {
+  float: left;
+  clear: left;
+}
+
+.saveBookmark {
+  float: right;
+}
+
+.bookmark.title {
   text-align: center;
   font-weight: bold;
 }
 
-.searchImage {
-
-}
-
-.searchDes {
-
-}
-
-.searchDate {
-
-}
-
-.searchTime {
-
-}
-
 .bookmarkDiv {
+  border: 2px solid black;
+  margin: 4px;
+  padding: 8px;
   height: 200px;
   width: 100%;
   overflow: hidden;
