@@ -20,13 +20,20 @@
   font-family: 'Nunito', sans-serif;
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
-  box-sizing: inherit;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
 }
 
 body {
-  background-image: url(image_path('concrete_seamless.png'))
+  // background-image: url(image_path('concrete_seamless.png'))
+  background-color: #C0C0C0;
 }
+
 .jsondata {
   visibility: hidden;
 }
@@ -68,45 +75,51 @@ hr.style-one {
 
 #api-results {
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .searchRes {
   border: 2px solid black;
   background: #EBAB46;
   display: inline-block;
-  width: 43%;
-  height: 250px;
-  float: left;
-  padding: 5px;
-  margin: 7px;
+  width: 46%;
+  height: 200px;
+  padding: 10px;
+  margin: 5px;
   overflow: hidden;
-}
 
-.content-padding {
-    padding: 10px;
-    overflow: hidden ; /* minds inside and outside floatting elements, fine if no size given */
 }
 
 .searchTitle {
   text-align: center;
   font-weight: bold;
-  float: right;
 }
 
-.searchImage img {
-  float: left;
-  clear: left;
-  height: 75px;
+.searchRes img {
+  padding: 2px;
+  margin: auto;
+  width: 70%;
+  height: 100px;
 }
 
 .searchDes {
-  float: right;
-  height: 50px;
+  margin: 0 auto;
+  height: 20px;
+  overflow: scroll;
+  text-align: center;
 }
 
 .searchTime {
   float: left;
   clear: left;
+}
+
+.searchResBtn {
+  float: right;
+
+}
+.searchResBtn:hover {
+  background-color: #00cc00;
 }
 
 .saveBookmark {
@@ -119,6 +132,7 @@ hr.style-one {
 }
 
 .bookmarkDiv {
+  background: #EBAB46;
   border: 2px solid black;
   margin: 4px;
   padding: 8px;
@@ -143,8 +157,11 @@ hr.style-one {
   float: left;
 }
 
+.btn-group {
+  margin: 0 auto;
+}
+
 #profile-column img {
-  display: block;
   margin: 0 auto;
   padding: 5px;
   margin-bottom: 10px;

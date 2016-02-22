@@ -29,12 +29,12 @@ function verifyThat() {
 }
 function renderSearchResultPartial(value) {
 // if any value.title match @bookmarks 
-  $("<div class='searchRes'><div class='content-padding'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><div class='searchTitle'>"+
-    value.title+"</div><div class='searchImage'><img src=\""+
-    value.image+"\"></img></div><div class='searchDes'>"+
+  $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><div class='searchTitle'>"+
+    value.title+"</div><img class='searchImage' alt='image unavailable' src=\""+
+    value.image+"\"></img><div class='searchDes'>"+
     value.description+"</div><div class='searchTime'>"+
     value.time+
-    "</div><button type='submit' class=' btn btn-default'>Save Bookmark</button></div></div>").appendTo("#api-results");
+    "</div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div>").appendTo("#api-results");
 }
 $(document).ready(function() {
     $("#searchButton").click(function(event) {

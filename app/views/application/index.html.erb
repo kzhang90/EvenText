@@ -1,10 +1,7 @@
 <div class="container-fluid">
   <div class="row">
-  <% @bookmarks.each do |bookmark| %>
-    <%= bookmark.title %>
-    <% end %>
     <div class="col-xs-6 col-xs-offset-3">
-      <h2 class="text-center">Search for an Event!</h2>
+      <h2 class="text-center">Event Search</h2>
         <form id="eventbrite-search" data-user_id="<%= current_user.id %>">
           <div class="form-group">
             <label for="keyword-box" class="sr-only">Keyword</label>
@@ -28,6 +25,9 @@
       </div>
 
     </div>
+
+<hr class="style-one">
+
   <div class="row" id="bottom-row">
       <div id="api-results" class="col-xs-12">
 
