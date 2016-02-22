@@ -5,9 +5,10 @@
 
     <%- model_class = Reminder -%>
     <div class="page-header">
-      <h2 class="text-center"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
+      <h2 class="text-center">My Upcoming Reminders</h2>
     </div>
-    <table class="table table-striped">
+    <!-- change this from a table to something else -->
+    <table class="table">
       <thead>
         <tr>
           <th><%= model_class.human_attribute_name(:title) %></th>
@@ -33,7 +34,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= link_to "New Reminder", new_user_reminder_path, :class => 'btn btn-primary' %>
+    <%= link_to "New Reminder", new_user_reminder_path, :class => 'newReminderBtn btn btn-primary' %>
 </div>
 </div>
 

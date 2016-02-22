@@ -8,8 +8,8 @@
         <%= f.input :title, class: "form-control",input_html: { value: @bookmark["title"] } %>
         <!-- pass bookmark into this form and set the default time -->
         <%= f.label :time%>
-        <%= f.datetime_select :time, input_html: { value: @bookmark["time"]} %>
-        <%= f.input :phone_number, class: "form-control", :placeholder => 'Please enter your phone number' %>
+        <%= f.datetime_select :time %>
+        <%= f.input :phone_number, class: "form-control", input_html: { value: current_user.phone_number} %>
         <%= f.submit class: "btn btn-primary"%>
         <%= link_to 'Cancel', user_bookmarks_path(current_user), class: "btn btn-danger" %>
       <% end %>
