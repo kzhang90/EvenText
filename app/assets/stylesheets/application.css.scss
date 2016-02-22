@@ -68,9 +68,17 @@ hr.style-one {
   margin: 5px;
 }
 
+#eventbrite-search {
+  text-align: center;
+}
 #eventbrite-search input {
   width: 100%;
   clear: both;
+}
+
+#search-button {
+  display: inline-block;
+  width: 100%;
 }
 
 #api-results {

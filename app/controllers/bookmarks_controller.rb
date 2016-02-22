@@ -33,8 +33,8 @@ class BookmarksController < ApplicationController
 
   def show
     @user = current_user
-    @reminder = Reminder.new
     @bookmark = Bookmark.find(params[:id])
+    @reminder = Reminder.new(:time => @bookmark.time)
   end
 
   def destroy

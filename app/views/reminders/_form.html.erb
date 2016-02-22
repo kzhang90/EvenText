@@ -16,7 +16,8 @@
 
   <%= f.input :title , class: "form-control"%>
   <%= f.input :phone_number, class: "form-control", input_html: { value: current_user.phone_number } %>
-  <%= f.input :time, class: "form-control" %>
+  <%= f.label :time %>
+  <%= f.datetime_select :time %>
   <%= f.submit nil, :class => "btn btn-primary" %>
   <%= link_to 'Cancel', user_reminders_path(current_user), class: "btn btn-danger" %>
 <% end %>
