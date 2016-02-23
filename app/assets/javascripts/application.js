@@ -71,7 +71,6 @@ $(document).ready(function() {
                 bookmark: data
             }
         });
-        console.log("hi")
         $(this).text("Bookmark Saved").css("background-color", "#00cc00");
     });
 });
