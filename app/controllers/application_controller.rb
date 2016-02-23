@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def index
     @user = current_user
-    @bookmarks = @user.bookmarks
+    # @bookmarks = @user.bookmarks
   end
 
   def after_sign_in_path_for(resource)

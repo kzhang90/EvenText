@@ -18,8 +18,8 @@
 //= require bootstrap-datepicker
 //= require_tree .
 function verifyThat() {
-          if($("#keyword-box").val()!="" && 
-            $("#city-box").val()!="" && 
+          if($("#keyword-box").val()!=="" && 
+            $("#city-box").val()!=="" && 
             $("#start-box").val() && 
             $("#end-box").val()) {
             return true;
@@ -36,7 +36,7 @@ function renderSearchResultPartial(value) {
     value.description+"</div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div>").appendTo("#api-results");
 }
 $(document).ready(function() {
-    $("#searchButton").click(function(event) {
+    $("#search-button").click(function(event) {
         event.preventDefault();
         if (verifyThat()) {
             $.ajax({
@@ -58,11 +58,11 @@ $(document).ready(function() {
             });
         }
     });
-    // if var id 
-    $('body').on('click', '.searchRes', function() {
+    $('body').on('click', '.searchResBtn', function() {
+
         var id = $('#eventbrite-search').data('user_id');
         var fullurl = "/users/"+ id +"/bookmarks";
-        var data = JSON.parse(decodeURIComponent($(this).children("div").attr("data-json")));
+        var data = JSON.parse(decodeURIComponent($(this).parent().children().attr("data-json")));
         $.ajax({
             url: fullurl,
             dataType: "json",
@@ -71,6 +71,7 @@ $(document).ready(function() {
                 bookmark: data
             }
         });
-        $(this).children("button").text("Bookmark Saved");
+        console.log("hi")
+        $(this).text("Bookmark Saved").css("background-color", "#00cc00");
     });
 });
