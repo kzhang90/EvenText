@@ -25,6 +25,11 @@
   box-sizing: border-box;
 }
 
+h1, h2, h3 {
+  color: #0080FF;
+  font-size: 50px;
+}
+
 img {
   display: block;
 }
@@ -64,9 +69,9 @@ hr.style-one {
   font-size: 25px;
 }
 
-#signup-form {
-  border: 5px solid black;
-  border-radius: 5%;
+.signup-form {
+  border: white solid 1px;
+  border-radius: 1%;
   background: #eee;
   padding: 20px;
   margin: 5px;

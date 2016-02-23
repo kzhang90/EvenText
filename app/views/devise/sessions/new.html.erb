@@ -1,9 +1,9 @@
 <div class="container-fluid">
-<h3 class="text-center">Log In</h3>
+<h3 class="text-center">Log in here.</h3>
 
 <div class="row">
 <div class="col-xs-6 col-xs-offset-3">
-  <div id="signup-form">
+  <div class="signup-form">
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-inputs">
         <%= f.input :email, :autocomplete => :off, :placeholer => "Enter",required: true, autofocus: true %>
