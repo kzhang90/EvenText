@@ -29,6 +29,10 @@ img {
   display: block;
 }
 
+.btn {
+  margin: 2px;
+}
+
 body {
   // background-image: url(image_path('concrete_seamless.png'))
   background-color: #C0C0C0;
@@ -64,8 +68,17 @@ hr.style-one {
   border: 5px solid black;
   border-radius: 5%;
   background: #eee;
-  padding: 10px;
+  padding: 20px;
   margin: 5px;
+}
+
+#signed-up {
+  text-align: center;
+}
+
+#facebook {
+  text-align: center;
+  margin: 10px;
 }
 
 #eventbrite-search {
@@ -76,7 +89,7 @@ hr.style-one {
   clear: both;
 }
 
-#search-button, .newReminderBtn {
+#search-button, .newReminderBtn, .long-btn {
   display: inline-block;
   width: 100%;
 }

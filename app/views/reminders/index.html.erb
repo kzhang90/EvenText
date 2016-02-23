@@ -7,6 +7,7 @@
     <div class="page-header">
       <h2 class="text-center">My Upcoming Reminders</h2>
     </div>
+    <%= link_to "make a custom reminder", new_user_reminder_path, :class => 'newReminderBtn btn btn-primary' %>
     <!-- change this from a table to something else -->
     <table class="table">
       <thead>
@@ -34,7 +35,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= link_to "New Reminder", new_user_reminder_path, :class => 'newReminderBtn btn btn-primary' %>
+    
 </div>
 </div>
 
