@@ -30,10 +30,9 @@ function verifyThat() {
 function renderSearchResultPartial(value) {
 // if any value.title match @bookmarks 
 // this is how we are displaying the data
-  $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><div class='searchTitleDateTime'>"+
-    value.title+" @ ("+value.time.substring(0,10)+" "+value.time.substring(11,16)+") "+"</div><img class='searchImage' alt='image unavailable' src=\""+
-    value.image+"\"></img><div class='searchDes'>"+
-    value.description+"</div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div>").appendTo("#api-results");
+  $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><img class='searchImage' alt='image unavailable' src=\""+
+    value.image+"\"></img><div class='searchDetails'><div class='searchTitleDateTime'>"+value.title+" @ ("+value.time.substring(0,10)+" "+value.time.substring(11,16)+") "+"</div></br><div class='searchDes'>"+
+    value.description+"</div><div class='searchUrl'><a href='"+value.url+"'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>").appendTo("#api-results");
 }
 $(document).ready(function() {
     $("#search-button").click(function(event) {
@@ -59,10 +58,10 @@ $(document).ready(function() {
         }
     });
     $('body').on('click', '.searchResBtn', function() {
-
+        console.log("clicked!")
         var id = $('#eventbrite-search').data('user_id');
         var fullurl = "/users/"+ id +"/bookmarks";
-        var data = JSON.parse(decodeURIComponent($(this).parent().children().attr("data-json")));
+        var data = JSON.parse(decodeURIComponent($(this).parent().parent().children().attr("data-json")));
         $.ajax({
             url: fullurl,
             dataType: "json",

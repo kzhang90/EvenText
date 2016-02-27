@@ -100,47 +100,54 @@ hr.style-one {
 }
 
 #api-results {
-  overflow: hidden;
-  margin: 0 auto;
 }
 
 .searchRes {
-  border: 4px solid #FF8243;
-  background: #EBAB46;
-  display: inline-block;
-  width: 46%;
-  height: 250px;
+  border: 2px solid blue;
+  background: white;
   padding: 10px;
-  margin: 5px;
-  overflow: hidden;
+  margin: 1px 1px;
+  vertical-align: middle;
+  min-height: 135px;
+}
+
+.searchRes img {
+  display: inline-block;
+  border: 1px solid black;
+  width: 20%;
+  height: 100%;
+}
+
+.searchDetails {
+  position: relative;
+  display: inline-block;
   text-align: center;
+  width: 80%;
+  padding-left: 5px;
 }
 
 .searchTitleDateTime {
+  display: inline-block;
   text-align: center;
   font-weight: bold;
 }
 
-.searchRes img {
-  padding: 2px;
-  margin: auto;
-  width: 70%;
-  height: 100px;
-}
-
 .searchDes {
   display: inline-block;
-  margin: 0 auto;
-  height: 30px;
-  text-align: center;
+  overflow: scroll;
+}
+
+.searchUrl {
+  
 }
 
 .searchResBtn {
-  display: inline-block;
+  position: absolute;
+  display: block;
   width: 100%;
-  vertical-align: middle;
   background-color: #C0C0C0;
 }
+
 .searchResBtn:hover {
   background-color: #00cc00;
 }
@@ -155,8 +162,8 @@ hr.style-one {
 }
 
 .bookmarkDiv {
-  background: #EBAB46;
-  border: 2px solid black;
+  background: white;
+  border: 1px solid black;
   margin: 4px;
   padding: 8px;
   height: 200px;
@@ -175,6 +182,7 @@ hr.style-one {
 }
 
 .bookmarkDiv img {
+  border: 1px solid black;
   width: 25%;
   height: 100%;
   float: left;
