@@ -12,7 +12,8 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-
+  # to enable sending of emails
+  config.action_mailer.perform_deliveries = true
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
   # mail messages will be stored in temp/letter_opener
