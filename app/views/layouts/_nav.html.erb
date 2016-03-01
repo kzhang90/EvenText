@@ -1,7 +1,7 @@
 <nav id="mainNav" class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">EvenText</a>
+      <a class="navbar-brand" href="#">EvenText</a>
     </div>
 
     <div class="collapse navbar-collapse">
@@ -9,7 +9,7 @@
         <% if current_user %>
           <li class="navbar-text"><span class="glyphicon glyphicon-user" aria-hidden="true"><a href="/users/<%=current_user.id%>" class="navbar-link"><%=current_user.first_name%></a></span></li>
           <!-- .nounderline{text-decoration: none} -->
-          <li><%= link_to "Event Search", root_path %></li>
+          <li><%= link_to "Event Search", index_path %></li>
           <li><%= link_to "Bookmarks", user_bookmarks_path(current_user.id) %></li>
           <li><%= link_to "Reminders", user_reminders_path(current_user.id)%></li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>

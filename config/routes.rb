@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     root to: "devise/sessions#new"
   end
 
-  get  'home', to: 'application#home'
+  get  'index', to: 'application#index'
   get  'search_apis', to: 'application#search_apis'
 
   devise_for :users, :controllers => { :omniauth_callbacks => 'callbacks' }
