@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  # workaround to get the new sessions to load first
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
 
-  root 'application#index'
   get  'home', to: 'application#home'
   get  'search_apis', to: 'application#search_apis'
 
