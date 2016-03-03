@@ -17,16 +17,21 @@ class ApplicationController < ActionController::Base
   end
 
   def search_apis
-    start_date = params[:start_date].to_s
-    end_date = params[:end_date].to_s
-    keyword = params[:keyword].to_s
-    city = params[:city].to_s
+    start_date = params[:start_date].to_s.downcase
+    end_date = params[:end_date].to_s.downcase
+    keyword = params[:keyword].to_s.downcase
+    city = params[:city].to_s.downcase
 
-    response = JSON.parse RestClient.get('https://www.eventbriteapi.com/v3/events/search?q='+
+    var = URI.escape('https://www.eventbriteapi.com/v3/events/search?q='+
       keyword+'&sort_by=best&venue.city='+city+'&start_date.range_start='+
-      start_date+'T00:00:00Z&start_date.range_end='+end_date+'T00:00:00Z',
+      start_date+'T00:00:00Z&start_date.range_end='+end_date+'T00:00:00Z')
+
+    first_response = RestClient.get(var,
       authorization: ENV['EVENTBRITE']
     )
+
+    response = JSON.parse first_response
+
     @events = response["events"]
     @bookmarks = @events.map { |event|
       if event["description"]["text"] && event["name"]["text"]

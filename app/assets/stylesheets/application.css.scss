@@ -126,7 +126,7 @@ hr.style-one {
   padding-left: 5px;
 }
 
-.searchTitleDateTime {
+.searchTitle, .searchTime {
   display: inline-block;
   text-align: center;
   font-weight: bold;
@@ -152,40 +152,27 @@ hr.style-one {
   background-color: #00cc00;
 }
 
-.saveBookmark {
-  float: right;
-}
-
-.bookmark.title {
-  text-align: center;
-  font-weight: bold;
-}
-
 .bookmarkDiv {
+  border: 2px solid blue;
   background: white;
-  border: 1px solid black;
-  margin: 4px;
-  padding: 8px;
-  height: 200px;
-  width: 100%;
-  overflow: hidden;
-}
-
-.bookmark.specifics {
-  float: right;
-  width: 75%;
-  text-align: center;
-}
-
-#bookmark-links {
-  display: inline;
+  padding: 10px;
+  margin: 1px 1px;
+  vertical-align: middle;
+  min-height: 135px;
 }
 
 .bookmarkDiv img {
+  display: inline-block;
   border: 1px solid black;
-  width: 25%;
+  width: 20%;
   height: 100%;
-  float: left;
+}
+
+.bookmarkSpec {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 50%;
 }
 
 .btn-group {
