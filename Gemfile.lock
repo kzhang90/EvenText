@@ -331,5 +331,8 @@ DEPENDENCIES
   uploadcare-rails (~> 1.0)
   web-console (~> 2.0)
 
+RUBY VERSION
+   ruby 2.0.0p643
+
 BUNDLED WITH
-   1.11.2
+   1.13.1
