@@ -38,10 +38,11 @@ gem 'daemons'
 gem 'rails_12factor', :group => :production
 gem 'puma'
 gem 'figaro'
-ruby '2.0.0'
+ruby '2.3.1'
 gem 'uploadcare-rails', "~> 1.0"
 gem 'bootstrap-datepicker-rails'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'faraday', '~> 0.9.2'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

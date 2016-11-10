@@ -23,13 +23,25 @@ class ApplicationController < ActionController::Base
     city = params[:city].to_s.downcase
 
     var = URI.escape('https://www.eventbriteapi.com/v3/events/search?q='+
-      keyword+'&sort_by=best&venue.city='+city+'&start_date.range_start='+
+      keyword+'&sort_by=best&location.address='+city+'&start_date.range_start='+
       start_date+'T00:00:00Z&start_date.range_end='+end_date+'T00:00:00Z')
 
-    first_response = RestClient.get(var,
-      authorization: ENV['EVENTBRITE']
-    )
+    # resource = RestClient::Request.execute method: :get, url: var, headers: {Authorization: ENV['EVENTBRITE']}
+    binding.pry
 
+    first_response = RestClient.get var, {params: {'token' => ENV['TOKEN']}}
+
+
+
+    # first_response = RestClient.get(var,
+    #   authorization: ENV['EVENTBRITE']
+    # )
+
+    # first_response = RestClient::Request.execute(
+    #                   :method => :get, 
+    #                   :url => var, 
+    #                   :headers => {authorization: 'Bearer 3PQLXFDASEKEJXXFKWZN'}
+    #                 )
     response = JSON.parse first_response
 
     @events = response["events"]
@@ -64,9 +76,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:first_name, :last_name, :email, :avatar, :password, :current_password, :password_confirmation) }
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password)}
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :avatar, :password, :password_confirmation) }
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :email, :avatar, :password, :current_password, :password_confirmation])    
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :avatar, :password, :password_confirmation])
   end
 
   # def user_time_zone(&block)

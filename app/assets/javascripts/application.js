@@ -27,6 +27,7 @@ function verifyThat() {
             return false;
           }
 }
+
 function renderSearchResultPartial(value) {
 // if any value.title match @bookmarks 
 // this is how we are displaying the data
@@ -37,7 +38,10 @@ function renderSearchResultPartial(value) {
 $(document).ready(function() {
     $("#search-button").click(function(event) {
         event.preventDefault();
+        console.log("search button clicked");
+
         if (verifyThat()) {
+            console.log("verifyThat true");
             $.ajax({
                 url: "/search_apis",
                 dataType: "json",
@@ -50,11 +54,17 @@ $(document).ready(function() {
                 success: function(data) {
                     $.each(data, function(index,
                         value) {
-                        renderSearchResultPartial
-                            (value);
+                        renderSearchResultPartial(value);
                     });
+                },
+                error: function(msg) {
+                    console.log(msg);
                 }
             });
+        }
+        else {
+            console.log("verifyThat is FALSE");
+            $("#eventbrite-search").trigger('reset');
         }
     });
     $('body').on('click', '.searchResBtn', function() {
