@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
       start_date+'T00:00:00Z&start_date.range_end='+end_date+'T00:00:00Z')
 
     # resource = RestClient::Request.execute method: :get, url: var, headers: {Authorization: ENV['EVENTBRITE']}
-    binding.pry
 
     first_response = RestClient.get var, {params: {'token' => ENV['TOKEN']}}
 
@@ -42,6 +41,7 @@ class ApplicationController < ActionController::Base
     #                   :url => var, 
     #                   :headers => {authorization: 'Bearer 3PQLXFDASEKEJXXFKWZN'}
     #                 )
+    # binding.pry
     response = JSON.parse first_response
 
     @events = response["events"]

@@ -31,6 +31,7 @@ function verifyThat() {
 function renderSearchResultPartial(value) {
 // if any value.title match @bookmarks 
 // this is how we are displaying the data
+    console.log("render search result partial");
   $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><img class='searchImage' alt='image unavailable' src=\""+
     value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+value.time.to_time.strftime('%A, %B %d at %I %p')+"<div class='searchDes'>"+
     value.description+"</div><div class='searchUrl'><a href='"+value.url+"'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>").appendTo("#api-results");
@@ -51,6 +52,7 @@ $(document).ready(function() {
                     start_date: $("#start-box").val(),
                     end_date: $("#end-box").val()
                 },
+                // data is in JSON
                 success: function(data) {
                     $.each(data, function(index,
                         value) {
