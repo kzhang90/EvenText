@@ -31,7 +31,8 @@ function verifyThat() {
 function renderSearchResultPartial(value) {
 // if any value.title match @bookmarks 
 // this is how we are displaying the data
-    console.log("render search result partial");
+    console.log("in renderSearchResultPartial");
+    console.log(value);
   $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><img class='searchImage' alt='image unavailable' src=\""+
     value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+value.time.to_time.strftime('%A, %B %d at %I %p')+"<div class='searchDes'>"+
     value.description+"</div><div class='searchUrl'><a href='"+value.url+"'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>").appendTo("#api-results");
@@ -43,6 +44,7 @@ $(document).ready(function() {
 
         if (verifyThat()) {
             console.log("verifyThat true");
+            // got past here
             $.ajax({
                 url: "/search_apis",
                 dataType: "json",
@@ -52,14 +54,18 @@ $(document).ready(function() {
                     start_date: $("#start-box").val(),
                     end_date: $("#end-box").val()
                 },
-                // data is in JSON
                 success: function(data) {
-                    $.each(data, function(index,
-                        value) {
+                    console.log("ajax success");
+                    console.log(typeof data);
+                    // typeof data is OBJECT
+                    // turn object into array?
+                    $.each(data, function(index, value) {
+                        console.log(value);
                         renderSearchResultPartial(value);
                     });
                 },
                 error: function(msg) {
+                    console.log("AJAX error");
                     console.log(msg);
                 }
             });

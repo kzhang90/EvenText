@@ -26,22 +26,8 @@ class ApplicationController < ActionController::Base
       keyword+'&sort_by=best&location.address='+city+'&start_date.range_start='+
       start_date+'T00:00:00Z&start_date.range_end='+end_date+'T00:00:00Z')
 
-    # resource = RestClient::Request.execute method: :get, url: var, headers: {Authorization: ENV['EVENTBRITE']}
-
     first_response = RestClient.get var, {params: {'token' => ENV['TOKEN']}}
 
-
-
-    # first_response = RestClient.get(var,
-    #   authorization: ENV['EVENTBRITE']
-    # )
-
-    # first_response = RestClient::Request.execute(
-    #                   :method => :get, 
-    #                   :url => var, 
-    #                   :headers => {authorization: 'Bearer 3PQLXFDASEKEJXXFKWZN'}
-    #                 )
-    # binding.pry
     response = JSON.parse first_response
 
     @events = response["events"]
@@ -51,11 +37,11 @@ class ApplicationController < ActionController::Base
           title: event["name"]["text"],
           image: event["logo"].nil? ? "" : event["logo"]["url"],
           description: event["description"]["text"].match(/^.*?[\.!\?](\s|$)/).to_s.gsub("\n"," "),
-          time: event["start"]["local"].split("T")[0] + " " + event["start"]["local"].split("T")[1],
+          time: event["start"]["local"].split("T")[0]+" "+event["start"]["local"].split("T")[1],
           url: event["url"])
       end
     }
-
+# parsing problem here, time has a "T" that needs to be eliminated
     @st = @bookmarks.map do |f|
       if !f.nil?
         {
@@ -68,9 +54,12 @@ class ApplicationController < ActionController::Base
         }
       end
     end
+    # binding.pry
+    # in @st, remove all nil values from array
     @st = @st - [nil]
 
-    render :json => @st
+# RENDER JSON ADDS T TO TIME
+    render json: @st
   end
 # take js controller is sending and js is transposing json to html
   protected
