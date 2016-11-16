@@ -37,11 +37,13 @@ class ApplicationController < ActionController::Base
           title: event["name"]["text"],
           image: event["logo"].nil? ? "" : event["logo"]["url"],
           description: event["description"]["text"].match(/^.*?[\.!\?](\s|$)/).to_s.gsub("\n"," "),
+          # string date turns into time object
           time: event["start"]["local"].split("T")[0]+" "+event["start"]["local"].split("T")[1],
           url: event["url"])
       end
     }
-# parsing problem here, time has a "T" that needs to be eliminated
+    # binding.pry
+
     @st = @bookmarks.map do |f|
       if !f.nil?
         {
@@ -54,11 +56,10 @@ class ApplicationController < ActionController::Base
         }
       end
     end
-    # binding.pry
-    # in @st, remove all nil values from array
-    @st = @st - [nil]
 
-# RENDER JSON ADDS T TO TIME
+    @st = @st - [nil]
+    # binding.pry
+    # changes time object into json
     render json: @st
   end
 # take js controller is sending and js is transposing json to html

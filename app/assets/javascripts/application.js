@@ -1,3 +1,5 @@
+
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -33,8 +35,11 @@ function renderSearchResultPartial(value) {
 // this is how we are displaying the data
     console.log("in renderSearchResultPartial");
     console.log(value);
+    let date = new Date(Date.parse(value.time)).toLocaleString();
+    // value.time = "2016-11-19T19:30:00.000-08:00"=
+    // value.time.to_time.strftime('%A, %B %d at %I %p')
   $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><img class='searchImage' alt='image unavailable' src=\""+
-    value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+value.time.to_time.strftime('%A, %B %d at %I %p')+"<div class='searchDes'>"+
+    value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+date+"<div class='searchDes'>"+
     value.description+"</div><div class='searchUrl'><a href='"+value.url+"'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>").appendTo("#api-results");
 }
 $(document).ready(function() {
@@ -56,12 +61,12 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     console.log("ajax success");
-                    console.log(typeof data);
-                    // typeof data is OBJECT
-                    // turn object into array?
+
                     $.each(data, function(index, value) {
-                        console.log(value);
+                        console.log(value.time);
                         renderSearchResultPartial(value);
+                        // "\"2016-11-19T19:30:00.000-08:00\"" needs to be turned into readable time
+                        // new Date(Date.parse(JSON.parse("\"2016-11-19T19:30:00.000-08:00\"")))
                     });
                 },
                 error: function(msg) {
