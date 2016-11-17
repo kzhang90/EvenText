@@ -42,6 +42,7 @@ function renderSearchResultPartial(value) {
     value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+date+"<div class='searchDes'>"+
     value.description+"</div><div class='searchUrl'><a href='"+value.url+"'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>").appendTo("#api-results");
 }
+
 $(document).ready(function() {
     $("#search-button").click(function(event) {
         event.preventDefault();
@@ -81,10 +82,18 @@ $(document).ready(function() {
         }
     });
     $('body').on('click', '.searchResBtn', function() {
+
         console.log("clicked!")
+
         var id = $('#eventbrite-search').data('user_id');
         var fullurl = "/users/"+ id +"/bookmarks";
-        var data = JSON.parse(decodeURIComponent($(this).parent().parent().children().attr("data-json")));
+
+        console.log(this);
+
+        var data = JSON.parse(decodeURIComponent($(this).parent().parent().parent().find(".jsondata").data("json")));
+       
+        console.log(data);
+        
         $.ajax({
             url: fullurl,
             dataType: "json",
