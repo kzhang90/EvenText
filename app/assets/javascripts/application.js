@@ -33,14 +33,15 @@ function verifyThat() {
 function renderSearchResultPartial(value) {
 // if any value.title match @bookmarks 
 // this is how we are displaying the data
-    console.log("in renderSearchResultPartial");
-    console.log(value);
-    let date = new Date(Date.parse(value.time)).toLocaleString();
+    // console.log("in renderSearchResultPartial");
+    var date = new Date(Date.parse(value.time)).toLocaleString();
     // value.time = "2016-11-19T19:30:00.000-08:00"=
     // value.time.to_time.strftime('%A, %B %d at %I %p')
   $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><img class='searchImage' alt='image unavailable' src=\""+
-    value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+date+"<div class='searchDes'>"+
-    value.description+"</div><div class='searchUrl'><a href='"+value.url+"'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>").appendTo("#api-results");
+    value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+
+    date+"<div class='searchDes'>"+value.description+"</div><div class='searchUrl'><a href='"+value.url+
+    "'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>")
+  .appendTo("#api-results");
 }
 
 $(document).ready(function() {
@@ -71,7 +72,7 @@ $(document).ready(function() {
                     });
                 },
                 error: function(msg) {
-                    console.log("AJAX error");
+                    // console.log("AJAX error");
                     console.log(msg);
                 }
             });
