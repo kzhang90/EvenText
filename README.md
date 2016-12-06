@@ -3,7 +3,7 @@
 
 ### Overview
 
-The app is live at www.eventext.herokuapp.com. (Live Demo currently down)
+This app is live at www.eventext.herokuapp.com
 
 "EvenText" is a web application build on the Ruby on Rails framework. Users can log on and search for nearby events and save selected events to their bookmarks. Once saved to their bookmarks, users can save any bookmark as a reminder and "EvenText" will text them their reminder a certain amount of time before the event. Ultimately, users of "EvenText" will save data and not worry about looking up their day to day plans.
 
