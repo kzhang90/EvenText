@@ -46,12 +46,8 @@ function renderSearchResultPartial(value) {
 
 $(document).ready(function() {
     $("#search-button").click(function(event) {
-        event.preventDefault();
-        console.log("search button clicked");
-
         if (verifyThat()) {
-            console.log("verifyThat true");
-            // got past here
+            event.preventDefault();
             $.ajax({
                 url: "/search_apis",
                 dataType: "json",
@@ -65,7 +61,6 @@ $(document).ready(function() {
                     console.log("ajax success");
 
                     $.each(data, function(index, value) {
-                        console.log(value.time);
                         renderSearchResultPartial(value);
                         // "\"2016-11-19T19:30:00.000-08:00\"" needs to be turned into readable time
                         // new Date(Date.parse(JSON.parse("\"2016-11-19T19:30:00.000-08:00\"")))
