@@ -19,16 +19,7 @@
 //= require angular/angular
 //= require bootstrap-datepicker
 //= require_tree .
-function verifyThat() {
-          if($("#keyword-box").val()!=="" && 
-            $("#city-box").val()!=="" && 
-            $("#start-box").val() && 
-            $("#end-box").val()) {
-            return true;
-          } else {
-            return false;
-          }
-}
+
 
 function renderSearchResultPartial(value) {
 // if any value.title match @bookmarks 
@@ -39,56 +30,60 @@ function renderSearchResultPartial(value) {
     // value.time.to_time.strftime('%A, %B %d at %I %p')
   $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><img class='searchImage' alt='image unavailable' src=\""+
     value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+
-    date+"<div class='searchDes'>"+value.description+"</div><div class='searchUrl'><a href='"+value.url+
+    date+"</div><div class='searchDes'>"+value.description+"</div><div class='searchUrl'><a href='"+value.url+
     "'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>")
   .appendTo("#api-results");
 }
 
 $(document).ready(function() {
-    $("#search-button").click(function(event) {
+    function verifyThat() {
+      if($("#keyword-box").val()!=="" && 
+        $("#city-box").val()!=="" && 
+        $("#start-box").val() && 
+        $("#end-box").val()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+// form still default submits
+    $("#eventbrite-search").submit(function(event) {
+        event.preventDefault();
+        var formData = {
+            'keyword': $("#keyword-box").val(),
+            'city': $("#city-box").val(),
+            'start_date': $("#start-box").val(),
+            'end_date': $("#end-box").val()
+        };
         if (verifyThat()) {
-            event.preventDefault();
             $.ajax({
                 url: "/search_apis",
                 dataType: "json",
-                data: {
-                    keyword: $("#keyword-box").val(),
-                    city: $("#city-box").val(),
-                    start_date: $("#start-box").val(),
-                    end_date: $("#end-box").val()
-                },
+                data: formData,
                 success: function(data) {
-                    console.log("ajax success");
-
                     $.each(data, function(index, value) {
                         renderSearchResultPartial(value);
-                        // "\"2016-11-19T19:30:00.000-08:00\"" needs to be turned into readable time
-                        // new Date(Date.parse(JSON.parse("\"2016-11-19T19:30:00.000-08:00\"")))
                     });
                 },
                 error: function(msg) {
-                    // console.log("AJAX error");
                     console.log(msg);
                 }
             });
-        }
-        else {
-            console.log("verifyThat is FALSE");
+        } else {
             $("#eventbrite-search").trigger('reset');
+            console.log("in else block")
         }
-    });
-    $('body').on('click', '.searchResBtn', function() {
 
-        console.log("clicked!")
+    });
+
+    $('body').on('click', '.searchResBtn', function() {
 
         var id = $('#eventbrite-search').data('user_id');
         var fullurl = "/users/"+ id +"/bookmarks";
 
-        console.log(this);
+        // console.log(this);
 
         var data = JSON.parse(decodeURIComponent($(this).parent().parent().parent().find(".jsondata").data("json")));
-       
-        console.log(data);
         
         $.ajax({
             url: fullurl,
