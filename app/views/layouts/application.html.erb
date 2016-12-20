@@ -3,7 +3,7 @@
 <head>
   <title>EvenText</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
   <%= csrf_meta_tags %>
   <%= include_uploadcare_widget_from_cdn version: "1.5.5", min: true %>
   <%= uploadcare_settings %>
@@ -41,6 +41,8 @@
 <div class="container">
 
 <%= yield %>
-
+<footer>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</footer>
 </body>
 </html>

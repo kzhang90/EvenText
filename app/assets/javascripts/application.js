@@ -20,22 +20,18 @@
 //= require bootstrap-datepicker
 //= require_tree .
 
-
-function renderSearchResultPartial(value) {
-// if any value.title match @bookmarks 
-// this is how we are displaying the data
-    // console.log("in renderSearchResultPartial");
-    var date = new Date(Date.parse(value.time)).toLocaleString();
-    // value.time = "2016-11-19T19:30:00.000-08:00"=
-    // value.time.to_time.strftime('%A, %B %d at %I %p')
-  $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><img class='searchImage' alt='image unavailable' src=\""+
-    value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+
-    date+"</div><div class='searchDes'>"+value.description+"</div><div class='searchUrl'><a href='"+value.url+
-    "'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>")
-  .appendTo("#api-results");
-}
-
 $(document).ready(function() {
+
+    function renderSearchResultPartial(value) {
+
+        var date = new Date(Date.parse(value.time)).toLocaleString();
+      $("<div class='searchRes'><div class='jsondata' data-json="+encodeURIComponent(JSON.stringify(value))+"></div><img class='searchImage' alt='image unavailable' src=\""+
+        value.image+"\"></img><div class='searchDetails'><div class='searchTitle'>"+value.title+"</div><div class='searchTime'>"+
+        date+"</div><div class='searchDes'>"+value.description+"</div><div class='searchUrl'><a href='"+value.url+
+        "'>Event Page</a></div><button type='submit' class='searchResBtn btn btn-default'>Save Bookmark</button></div></div>")
+      .appendTo("#api-results");
+    }
+
     function verifyThat() {
       if($("#keyword-box").val()!=="" && 
         $("#city-box").val()!=="" && 
@@ -47,8 +43,23 @@ $(document).ready(function() {
       }
     }
 // form still default submits
+
+// first click binds the event handler. second click triggers event.
+
+// my problem: this function does not get bound unless i click it whereas i think it's supposed to be bound
+// on page load.
+
+// maybe since this function runs after eventbrite search is 
     $("#eventbrite-search").submit(function(event) {
+        alert("will this be attached?");
+    })
+    $("#eventbrite-search").submit(function(event) {
+        // first click adds the event listener.
+        // second click alerts fired.
+        alert("fired!");
         event.preventDefault();
+        console.log(event);
+        event.stopImmediatePropagation();
         var formData = {
             'keyword': $("#keyword-box").val(),
             'city': $("#city-box").val(),
@@ -59,22 +70,27 @@ $(document).ready(function() {
             $.ajax({
                 url: "/search_apis",
                 dataType: "json",
-                data: formData,
-                success: function(data) {
-                    $.each(data, function(index, value) {
-                        renderSearchResultPartial(value);
-                    });
-                },
-                error: function(msg) {
-                    console.log(msg);
-                }
-            });
+                data: formData
+            }).done(function(data) {
+                $.each(data, function(index, value) {
+                    renderSearchResultPartial(value);
+                });
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+                });
         } else {
             $("#eventbrite-search").trigger('reset');
             console.log("in else block")
         }
-
+        // this.submit();
+        return false;
     });
+
+
+
+
 
     $('body').on('click', '.searchResBtn', function() {
 
@@ -96,3 +112,4 @@ $(document).ready(function() {
         $(this).text("Bookmark Saved").css("background-color", "#00cc00");
     });
 });
+// ,10)
